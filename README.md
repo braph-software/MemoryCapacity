@@ -13,14 +13,15 @@ The **BRAPH 2.0 Memory Capacity** is a pipeline that implements the reservoir co
 ### Code Implementation
 The codes implementing the global and regional memory capacity are located in the [braph2mc/pipelines/MemoryCapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity) folder.
 
-
 ### Usage of the “MemoryCapacity” Pipeline
 The braph2mc folder contains a fully compiled version of BRAPH 2.0 with only this pipeline. To use the pipeline, follow these steps:
 1.	Open the [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc) folder.
 3.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB.
 4.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
 
-This pipeline utilizes the full functionalities of the BRAPH 2.0 software. For more information on how to use BRAPH 2.0, please refer to the BRAPH 2.0 Tutorials.
+### BRAPH 2.0 tutorials
+
+This pipeline utilizes the full functionalities of the BRAPH 2.0 software. For more information on how to use BRAPH 2.0, please refer to the [BRAPH 2.0 Tutorials](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials). More information about BRAPH 2.0 can be found both in the [BRAPH 2.0 repository](https://github.com/braph-software/BRAPH-2/tree/develop) and http://braph.org/.
 
 ### Example
 1. Create dataset (if you haven't done so) by running [create_data_Memory_Capacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/pipelines/MemoryCapacity/create_data_Memory_Capacity.m). This will create the folder [Example data Memory Capacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity/Example%20data%20Memory%20Capacity) (already included in the compiled version under [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc) folder.
@@ -29,3 +30,5 @@ This pipeline utilizes the full functionalities of the BRAPH 2.0 software. For m
 ### Software compilation
 
 The compiled version of the software is already provided in this repository under "braph2mc" folder. However, if you would like to compile the software again (e.g., after implementing new functionalities in BRAPH 2.0) you will need to run [braph2genesis.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2genesis/braph2genesis.m) file. This will re-generate "braph2mc" folder which can be used as explained above. **WARNING**: be aware that this process will erase all files inside "braph2mc" folder and re-generate them again.
+
+
