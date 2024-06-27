@@ -17,10 +17,11 @@ The codes implementing the global and regional memory capacity are located in th
 ### Usage of the “MemoryCapacity” Pipeline
 The braph2mc folder contains a fully compiled version of BRAPH 2.0 with only this pipeline. To use the pipeline, follow these steps:
 1.	Open the [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc) folder.
-3.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB.
+3.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB.
 4.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
 
 This pipeline utilizes the full functionalities of the BRAPH 2.0 software. For more information on how to use BRAPH 2.0, please refer to the BRAPH 2.0 Tutorials.
 
-### Example File
-example_MemoryCapacity.m is an example file demonstrating how to use the MemoryCapacity pipeline. It can be found in the same directory.
+### Example
+1. Create dataset (if you haven't done so) by running [create_data_Memory_Capacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/pipelines/MemoryCapacity/create_data_Memory_Capacity.m). This will create the folder [Example data Memory Capacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity/Example%20data%20Memory%20Capacity) (already included in the compiled version under [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc folder.
+2. Run [example_MemoryCapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/example_MemoryCapacity.m). It is an example file demonstrating how to use the MemoryCapacity pipeline. It can be found in the same directory.
