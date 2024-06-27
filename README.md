@@ -1,1 +1,22 @@
-# MemoryCapacity
+![BRAPH 2.0](braph2banner.png)
+
+# BRAPH 2.0 — Multimodal and AI-powered Brain Connectivity Analysis
+
+[![BRAPH 2](https://img.shields.io/twitter/url?label=BRAPH%202&style=social&url=https%3A%2F%2Ftwitter.com%2Fbraph2software)](https://twitter.com/braph2software)
+[![Website](https://img.shields.io/website?up_message=braph.org&url=http%3A%2F%2Fbraph.org%2F)](http://braph.org/)
+[![DOI](https://img.shields.io/badge/DOI-10.1371%2Fjournal.pone.0178798-blue)](https://doi.org/10.1371/journal.pone.0178798)
+
+<br />
+
+BRAPH 2.0 Memory Capacity
+The BRAPH 2.0 Memory Capacity is a pipeline that implements the reservoir computing paradigm, enabling the calculation of both global and regional memory capacity. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2024).
+Code Implementation
+The codes implementing the global and regional memory capacity are located in the “MemoryCapacity” folder.
+Usage of the “MemoryCapacity” Pipeline
+The braph2mc folder contains a fully compiled version of BRAPH 2.0 with only this pipeline. To use the pipeline, follow these steps:
+1.	Open the braph2mc folder.
+2.	Execute the braph2mc script in MATLAB.
+3.	Click on the link that the MATLAB terminal will print.
+This pipeline utilizes the full functionalities of the BRAPH 2.0 software. For more information on how to use BRAPH 2.0, please refer to the BRAPH 2.0 Tutorials.
+Example File
+example_MemoryCapacity.m is an example file demonstrating how to use the MemoryCapacity pipeline. It can be found in the same directory.

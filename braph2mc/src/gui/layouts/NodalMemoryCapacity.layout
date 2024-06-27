@@ -1,0 +1,40 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Measure ID
+1
+Measure NAME
+2
+Measure NOTES
+11
+TOSTRING
+NaN
+SHAPE
+NaN
+SCOPE
+NaN
+PARAMETRICITY
+NaN
+Compatible Graphs
+12
+Graph
+3
+NodalMemoryCapacity
+9
+Measure Plot
+10
+Measure TRIALS
+4
+Measure TRAINING_SAMPLES
+5
+Measure TAU_MAX
+6
+Measure N_LOWER
+7
+Measure DENSITY
+8
