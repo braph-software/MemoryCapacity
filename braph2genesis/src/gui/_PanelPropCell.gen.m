@@ -161,14 +161,14 @@ if value
 % % %                 if (isa(el, 'ComparisonGroup') | isa(el, 'ComparisonEnsemble')) && el.existsTag('QVALUE')
 % % %                     
 % % %                     tmp_data = get_p_value();
-% % %
+% % %                     
 % % %                     if size(tmp_data, 1) > size(tmp_data, 2)
 % % %                         tmp_data = tmp_data';
 % % %                     end
-% % %
+% % %                     
 % % %                     [~, mask] = fdr(tmp_data, el.get('QVALUE'));
 % % %                     [cols, rows] = find(mask);
-% % %
+% % %                     
 % % %                     if ~isempty(rows) && ~isempty(cols)
 % % %                         s = uistyle('BackgroundColor',[146/255 179/255 175/255]);
 % % %                         addStyle(pr.table, s, 'cell', [rows', cols']);
@@ -184,26 +184,8 @@ if value
 end
 %%%% ¡calculate_callbacks!
 function value = set_sliders_and_get_value()
-value = el.get(prop);
-% adapt to mc
-data = value{1};
-if isequal(el.get('MEASURE'), 'NodalMemoryCapacity')
-    % split
-    for i = 1:size(data, ndims(data))
-        tmp_layer_val{i} = cellfun(@(x) x(:,:,i), value, 'UniformOutput',false);
-    end
-else
-    for i = 1:size(data, ndims(data))
-        tmp_layer_val{i} = cellfun(@(x) x(:, i), value, 'UniformOutput',false);
-    end
-end
-%average
-value = [];
-for i = 1:size(data, ndims(data))
-    tmp_trials = tmp_layer_val{i};
-    value{i} =  mean(cat(ndims(tmp_trials{1}) + 1, tmp_trials{:}), ndims(tmp_trials{1}) + 1);
-end
-if isempty(value)
+    value = el.get(prop);
+    if isempty(value)
         set(pr.get('XSLIDER'), ...
             'Limits', [.6 1.4], ...
             'MajorTicks', [1], ...

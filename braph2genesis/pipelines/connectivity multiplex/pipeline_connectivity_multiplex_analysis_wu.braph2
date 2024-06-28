@@ -1,6 +1,6 @@
-%% Pipeline Connectivity Multiplex Analysis WU for Memory Capacity
+%% Pipeline Connectivity Multiplex Analysis WU
 
-% This is the pipeline script to analyze a group of subjects using connectivity multiplex data and a weighted undirected graph for Memory Capacity.
+% This is the pipeline script to analyze a group of subjects using connectivity multiplex data and a weighted undirected graph.
 % The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI).
 % 1. It loads a brain atlas from an XLS file (e.g., aal90_atlas.xlsx).
 % 2. It loads the connectivity data of one group of subjects from two directories (e.g., CON_MP_Group_1 and CON_MP_Group_2) containing XLS files of each subject.
