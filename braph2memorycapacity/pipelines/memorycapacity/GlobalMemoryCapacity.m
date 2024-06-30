@@ -4,28 +4,6 @@ classdef GlobalMemoryCapacity < Measure
 	%
 	% Fix this Mite
 	%
-	% The list of GlobalMemoryCapacity properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the GlobalMemoryCapacity.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the GlobalMemoryCapacity.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the GlobalMemoryCapacity.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the GlobalMemoryCapacity.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the GlobalMemoryCapacity.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the GlobalMemoryCapacity.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the GlobalMemoryCapacity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
-	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the GlobalMemoryCapacity.
-	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
-	%  <strong>17</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples.
-	%  <strong>18</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the number of tau.
-	%  <strong>19</strong> <strong>N_LOWER</strong> 	N_LOWER (parameter, scalar) is the n lower.
-	%  <strong>20</strong> <strong>DENSITY</strong> 	DENSITY (parameter, scalar) is the density.
-	%
 	% GlobalMemoryCapacity methods (constructor):
 	%  GlobalMemoryCapacity - constructor
 	%
@@ -113,30 +91,30 @@ classdef GlobalMemoryCapacity < Measure
 	%
 	
 	properties (Constant) % properties
-		TRIALS = 16; %CET: Computational Efficiency Trick
+		TRIALS = Measure.getPropNumber() + 1;
 		TRIALS_TAG = 'TRIALS';
-		TRIALS_CATEGORY = 3;
-		TRIALS_FORMAT = 11;
+		TRIALS_CATEGORY = Category.PARAMETER;
+		TRIALS_FORMAT = Format.SCALAR;
 		
-		TRAINING_SAMPLES = 17; %CET: Computational Efficiency Trick
+		TRAINING_SAMPLES = Measure.getPropNumber() + 2;
 		TRAINING_SAMPLES_TAG = 'TRAINING_SAMPLES';
-		TRAINING_SAMPLES_CATEGORY = 3;
-		TRAINING_SAMPLES_FORMAT = 11;
+		TRAINING_SAMPLES_CATEGORY = Category.PARAMETER;
+		TRAINING_SAMPLES_FORMAT = Format.SCALAR;
 		
-		TAU_MAX = 18; %CET: Computational Efficiency Trick
+		TAU_MAX = Measure.getPropNumber() + 3;
 		TAU_MAX_TAG = 'TAU_MAX';
-		TAU_MAX_CATEGORY = 3;
-		TAU_MAX_FORMAT = 11;
+		TAU_MAX_CATEGORY = Category.PARAMETER;
+		TAU_MAX_FORMAT = Format.SCALAR;
 		
-		N_LOWER = 19; %CET: Computational Efficiency Trick
+		N_LOWER = Measure.getPropNumber() + 4;
 		N_LOWER_TAG = 'N_LOWER';
-		N_LOWER_CATEGORY = 3;
-		N_LOWER_FORMAT = 11;
+		N_LOWER_CATEGORY = Category.PARAMETER;
+		N_LOWER_FORMAT = Format.SCALAR;
 		
-		DENSITY = 20; %CET: Computational Efficiency Trick
+		DENSITY = Measure.getPropNumber() + 5;
 		DENSITY_TAG = 'DENSITY';
-		DENSITY_CATEGORY = 3;
-		DENSITY_FORMAT = 11;
+		DENSITY_CATEGORY = Category.PARAMETER;
+		DENSITY_FORMAT = Format.SCALAR;
 	end
 	methods % constructor
 		function m = GlobalMemoryCapacity(varargin)
@@ -149,27 +127,6 @@ classdef GlobalMemoryCapacity < Measure
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of GlobalMemoryCapacity properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the GlobalMemoryCapacity.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the GlobalMemoryCapacity.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the GlobalMemoryCapacity.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the GlobalMemoryCapacity.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the GlobalMemoryCapacity.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the GlobalMemoryCapacity.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the GlobalMemoryCapacity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
-			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the GlobalMemoryCapacity.
-			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
-			%  <strong>17</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples.
-			%  <strong>18</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the number of tau.
-			%  <strong>19</strong> <strong>N_LOWER</strong> 	N_LOWER (parameter, scalar) is the n lower.
-			%  <strong>20</strong> <strong>DENSITY</strong> 	DENSITY (parameter, scalar) is the density.
 			%
 			% See also Category, Format.
 			
@@ -207,7 +164,7 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'GlobalMemoryCapacity' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('GlobalMemoryCapacity', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of global memory capacity.
@@ -228,30 +185,60 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
+				prop_list = [ ...
+					Measure.getProps() ...
+						GlobalMemoryCapacity.TRIALS ...
+						GlobalMemoryCapacity.TRAINING_SAMPLES ...
+						GlobalMemoryCapacity.TAU_MAX ...
+						GlobalMemoryCapacity.N_LOWER ...
+						GlobalMemoryCapacity.DENSITY ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2 3 9 10 11 12];
-				case 2 % Category.METADATA
-					prop_list = [6 7];
-				case 3 % Category.PARAMETER
-					prop_list = [4 16 17 18 19 20];
-				case 4 % Category.DATA
-					prop_list = [5 13];
-				case 5 % Category.RESULT
-					prop_list = 14;
-				case 6 % Category.QUERY
-					prop_list = 8;
-				case 9 % Category.GUI
-					prop_list = 15;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Measure.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Measure.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Measure.getProps(Category.PARAMETER) ...
+						GlobalMemoryCapacity.TRIALS ...
+						GlobalMemoryCapacity.TRAINING_SAMPLES ...
+						GlobalMemoryCapacity.TAU_MAX ...
+						GlobalMemoryCapacity.N_LOWER ...
+						GlobalMemoryCapacity.DENSITY ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Measure.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Measure.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Measure.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Measure.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Measure.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Measure.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -272,31 +259,7 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 20;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 7;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 6;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 6 % Category.QUERY
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(GlobalMemoryCapacity.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in global memory capacity/error.
@@ -324,14 +287,14 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 20 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == GlobalMemoryCapacity.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GlobalMemoryCapacity:' 'WrongInput'], ...
-					['BRAPH2' ':GlobalMemoryCapacity:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for GlobalMemoryCapacity.'] ...
 					)
 			end
@@ -362,14 +325,15 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'N_LOWER'  'DENSITY' })); %CET: Computational Efficiency Trick
+			globalmemorycapacity_tag_list = cellfun(@(x) GlobalMemoryCapacity.getPropTag(x), num2cell(GlobalMemoryCapacity.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, globalmemorycapacity_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GlobalMemoryCapacity:' 'WrongInput'], ...
-					['BRAPH2' ':GlobalMemoryCapacity:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for GlobalMemoryCapacity.'] ...
 					)
 			end
@@ -395,7 +359,8 @@ classdef GlobalMemoryCapacity < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'N_LOWER'  'DENSITY' })); % tag = pointer %CET: Computational Efficiency Trick
+				globalmemorycapacity_tag_list = cellfun(@(x) GlobalMemoryCapacity.getPropTag(x), num2cell(GlobalMemoryCapacity.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, globalmemorycapacity_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -423,9 +388,22 @@ classdef GlobalMemoryCapacity < Measure
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				globalmemorycapacity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'N_LOWER'  'DENSITY' };
-				tag = globalmemorycapacity_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case GlobalMemoryCapacity.TRIALS
+						tag = GlobalMemoryCapacity.TRIALS_TAG;
+					case GlobalMemoryCapacity.TRAINING_SAMPLES
+						tag = GlobalMemoryCapacity.TRAINING_SAMPLES_TAG;
+					case GlobalMemoryCapacity.TAU_MAX
+						tag = GlobalMemoryCapacity.TAU_MAX_TAG;
+					case GlobalMemoryCapacity.N_LOWER
+						tag = GlobalMemoryCapacity.N_LOWER_TAG;
+					case GlobalMemoryCapacity.DENSITY
+						tag = GlobalMemoryCapacity.DENSITY_TAG;
+					otherwise
+						tag = getPropTag@Measure(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -450,9 +428,20 @@ classdef GlobalMemoryCapacity < Measure
 			
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			globalmemorycapacity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3  3  3  3  3 };
-			prop_category = globalmemorycapacity_category_list{prop};
+			switch prop
+				case GlobalMemoryCapacity.TRIALS
+					prop_category = GlobalMemoryCapacity.TRIALS_CATEGORY;
+				case GlobalMemoryCapacity.TRAINING_SAMPLES
+					prop_category = GlobalMemoryCapacity.TRAINING_SAMPLES_CATEGORY;
+				case GlobalMemoryCapacity.TAU_MAX
+					prop_category = GlobalMemoryCapacity.TAU_MAX_CATEGORY;
+				case GlobalMemoryCapacity.N_LOWER
+					prop_category = GlobalMemoryCapacity.N_LOWER_CATEGORY;
+				case GlobalMemoryCapacity.DENSITY
+					prop_category = GlobalMemoryCapacity.DENSITY_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@Measure(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -476,9 +465,20 @@ classdef GlobalMemoryCapacity < Measure
 			
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			globalmemorycapacity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  11  11  11  11  11 };
-			prop_format = globalmemorycapacity_format_list{prop};
+			switch prop
+				case GlobalMemoryCapacity.TRIALS
+					prop_format = GlobalMemoryCapacity.TRIALS_FORMAT;
+				case GlobalMemoryCapacity.TRAINING_SAMPLES
+					prop_format = GlobalMemoryCapacity.TRAINING_SAMPLES_FORMAT;
+				case GlobalMemoryCapacity.TAU_MAX
+					prop_format = GlobalMemoryCapacity.TAU_MAX_FORMAT;
+				case GlobalMemoryCapacity.N_LOWER
+					prop_format = GlobalMemoryCapacity.N_LOWER_FORMAT;
+				case GlobalMemoryCapacity.DENSITY
+					prop_format = GlobalMemoryCapacity.DENSITY_FORMAT;
+				otherwise
+					prop_format = getPropFormat@Measure(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -502,9 +502,44 @@ classdef GlobalMemoryCapacity < Measure
 			
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			globalmemorycapacity_description_list = { 'ELCLASS (constant, string) is the class of the GlobalMemoryCapacity.'  'NAME (constant, string) is the name of the GlobalMemoryCapacity.'  'DESCRIPTION (constant, string) is the description of the GlobalMemoryCapacity.'  'TEMPLATE (parameter, item) is the template of the GlobalMemoryCapacity.'  'ID (data, string) is a few-letter code of the GlobalMemoryCapacity.'  'LABEL (metadata, string) is an extended label of the GlobalMemoryCapacity.'  'NOTES (metadata, string) are some specific notes about the GlobalMemoryCapacity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the GlobalMemoryCapacity.'  'PFM (gui, item) contains the panel figure of the measure.'  'TRIALS (parameter, scalar) is the number of trials.'  'TRAINING_SAMPLES (parameter, scalar) is the number of training samples.'  'TAU_MAX (parameter, scalar) is the number of tau.'  'N_LOWER (parameter, scalar) is the n lower.'  'DENSITY (parameter, scalar) is the density.' };
-			prop_description = globalmemorycapacity_description_list{prop};
+			switch prop
+				case GlobalMemoryCapacity.TRIALS
+					prop_description = 'TRIALS (parameter, scalar) is the number of trials.';
+				case GlobalMemoryCapacity.TRAINING_SAMPLES
+					prop_description = 'TRAINING_SAMPLES (parameter, scalar) is the number of training samples.';
+				case GlobalMemoryCapacity.TAU_MAX
+					prop_description = 'TAU_MAX (parameter, scalar) is the number of tau.';
+				case GlobalMemoryCapacity.N_LOWER
+					prop_description = 'N_LOWER (parameter, scalar) is the n lower.';
+				case GlobalMemoryCapacity.DENSITY
+					prop_description = 'DENSITY (parameter, scalar) is the density.';
+				case GlobalMemoryCapacity.ELCLASS
+					prop_description = 'ELCLASS (constant, string) is the class of the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.NAME
+					prop_description = 'NAME (constant, string) is the name of the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.ID
+					prop_description = 'ID (data, string) is a few-letter code of the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the GlobalMemoryCapacity.';
+				case GlobalMemoryCapacity.SHAPE
+					prop_description = 'SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.';
+				case GlobalMemoryCapacity.SCOPE
+					prop_description = 'SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.';
+				case GlobalMemoryCapacity.PARAMETRICITY
+					prop_description = 'PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.';
+				case GlobalMemoryCapacity.COMPATIBLE_GRAPHS
+					prop_description = 'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.';
+				case GlobalMemoryCapacity.M
+					prop_description = 'M (result, cell) is the GlobalMemoryCapacity.';
+				otherwise
+					prop_description = getPropDescription@Measure(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -528,18 +563,18 @@ classdef GlobalMemoryCapacity < Measure
 			
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 16 % GlobalMemoryCapacity.TRIALS
-					prop_settings = Format.getFormatSettings(11);
-				case 17 % GlobalMemoryCapacity.TRAINING_SAMPLES
-					prop_settings = Format.getFormatSettings(11);
-				case 18 % GlobalMemoryCapacity.TAU_MAX
-					prop_settings = Format.getFormatSettings(11);
-				case 19 % GlobalMemoryCapacity.N_LOWER
-					prop_settings = Format.getFormatSettings(11);
-				case 20 % GlobalMemoryCapacity.DENSITY
-					prop_settings = Format.getFormatSettings(11);
-				case 4 % GlobalMemoryCapacity.TEMPLATE
+			switch prop
+				case GlobalMemoryCapacity.TRIALS
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case GlobalMemoryCapacity.TRAINING_SAMPLES
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case GlobalMemoryCapacity.TAU_MAX
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case GlobalMemoryCapacity.N_LOWER
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case GlobalMemoryCapacity.DENSITY
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case GlobalMemoryCapacity.TEMPLATE
 					prop_settings = 'GlobalMemoryCapacity';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
@@ -567,38 +602,38 @@ classdef GlobalMemoryCapacity < Measure
 			
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 16 % GlobalMemoryCapacity.TRIALS
+			switch prop
+				case GlobalMemoryCapacity.TRIALS
 					prop_default = 10;
-				case 17 % GlobalMemoryCapacity.TRAINING_SAMPLES
+				case GlobalMemoryCapacity.TRAINING_SAMPLES
 					prop_default = 20000;
-				case 18 % GlobalMemoryCapacity.TAU_MAX
+				case GlobalMemoryCapacity.TAU_MAX
 					prop_default = 50;
-				case 19 % GlobalMemoryCapacity.N_LOWER
+				case GlobalMemoryCapacity.N_LOWER
 					prop_default = 1;
-				case 20 % GlobalMemoryCapacity.DENSITY
+				case GlobalMemoryCapacity.DENSITY
 					prop_default = 1;
-				case 1 % GlobalMemoryCapacity.ELCLASS
+				case GlobalMemoryCapacity.ELCLASS
 					prop_default = 'GlobalMemoryCapacity';
-				case 2 % GlobalMemoryCapacity.NAME
+				case GlobalMemoryCapacity.NAME
 					prop_default = 'GlobalMemoryCapacity';
-				case 3 % GlobalMemoryCapacity.DESCRIPTION
+				case GlobalMemoryCapacity.DESCRIPTION
 					prop_default = 'Fix this Mite';
-				case 4 % GlobalMemoryCapacity.TEMPLATE
-					prop_default = Format.getFormatDefault(8, GlobalMemoryCapacity.getPropSettings(prop));
-				case 5 % GlobalMemoryCapacity.ID
+				case GlobalMemoryCapacity.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.ID
 					prop_default = 'GlobalMemoryCapacity ID';
-				case 6 % GlobalMemoryCapacity.LABEL
+				case GlobalMemoryCapacity.LABEL
 					prop_default = 'GlobalMemoryCapacity label';
-				case 7 % GlobalMemoryCapacity.NOTES
+				case GlobalMemoryCapacity.NOTES
 					prop_default = 'GlobalMemoryCapacity notes';
-				case 9 % GlobalMemoryCapacity.SHAPE
-					prop_default = 1;
-				case 10 % GlobalMemoryCapacity.SCOPE
-					prop_default = 2;
-				case 11 % GlobalMemoryCapacity.PARAMETRICITY
-					prop_default = 2;
-				case 12 % GlobalMemoryCapacity.COMPATIBLE_GRAPHS
+				case GlobalMemoryCapacity.SHAPE
+					prop_default = Measure.GLOBAL;
+				case GlobalMemoryCapacity.SCOPE
+					prop_default = Measure.UNILAYER;
+				case GlobalMemoryCapacity.PARAMETRICITY
+					prop_default = Measure.NONPARAMETRIC;
+				case GlobalMemoryCapacity.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWU'};
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
@@ -645,15 +680,15 @@ classdef GlobalMemoryCapacity < Measure
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:GlobalMemoryCapacity:WrongInput
+			%  Error id: €BRAPH2.STR€:GlobalMemoryCapacity:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: BRAPH2:GlobalMemoryCapacity:WrongInput
+			%   Error id: €BRAPH2.STR€:GlobalMemoryCapacity:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(GlobalMemoryCapacity, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GlobalMemoryCapacity.
-			%   Error id: BRAPH2:GlobalMemoryCapacity:WrongInput
+			%   Error id: €BRAPH2.STR€:GlobalMemoryCapacity:€BRAPH2.WRONG_INPUT€
 			%  M.CHECKPROP(GlobalMemoryCapacity, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GlobalMemoryCapacity.
-			%   Error id: BRAPH2:GlobalMemoryCapacity:WrongInput]
+			%   Error id: €BRAPH2.STR€:GlobalMemoryCapacity:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('GlobalMemoryCapacity')
 			%  are less computationally efficient.
@@ -664,20 +699,20 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			switch prop
-				case 16 % GlobalMemoryCapacity.TRIALS
-					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 17 % GlobalMemoryCapacity.TRAINING_SAMPLES
-					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 18 % GlobalMemoryCapacity.TAU_MAX
-					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 19 % GlobalMemoryCapacity.N_LOWER
-					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 20 % GlobalMemoryCapacity.DENSITY
-					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 4 % GlobalMemoryCapacity.TEMPLATE
-					check = Format.checkFormat(8, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.TRIALS % __GlobalMemoryCapacity.TRIALS__
+					check = Format.checkFormat(Format.SCALAR, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.TRAINING_SAMPLES % __GlobalMemoryCapacity.TRAINING_SAMPLES__
+					check = Format.checkFormat(Format.SCALAR, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.TAU_MAX % __GlobalMemoryCapacity.TAU_MAX__
+					check = Format.checkFormat(Format.SCALAR, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.N_LOWER % __GlobalMemoryCapacity.N_LOWER__
+					check = Format.checkFormat(Format.SCALAR, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.DENSITY % __GlobalMemoryCapacity.DENSITY__
+					check = Format.checkFormat(Format.SCALAR, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case GlobalMemoryCapacity.TEMPLATE % __GlobalMemoryCapacity.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, GlobalMemoryCapacity.getPropSettings(prop));
 				otherwise
-					if prop <= 15
+					if prop <= Measure.getPropNumber()
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -686,8 +721,8 @@ classdef GlobalMemoryCapacity < Measure
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GlobalMemoryCapacity:' 'WrongInput'], ...
-					['BRAPH2' ':GlobalMemoryCapacity:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' GlobalMemoryCapacity.getPropTag(prop) ' (' GlobalMemoryCapacity.getFormatTag(GlobalMemoryCapacity.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -698,20 +733,20 @@ classdef GlobalMemoryCapacity < Measure
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 14 % GlobalMemoryCapacity.M
-					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
+				case GlobalMemoryCapacity.M % __GlobalMemoryCapacity.M__
+					rng_settings_ = rng(); rng(m.getPropSeed(GlobalMemoryCapacity.M), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					tmp_data = g.get('A'); % cell with the subjects data
@@ -798,7 +833,7 @@ classdef GlobalMemoryCapacity < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 15
+					if prop <= Measure.getPropNumber()
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});
