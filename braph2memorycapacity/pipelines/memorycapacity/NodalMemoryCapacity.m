@@ -4,6 +4,28 @@ classdef NodalMemoryCapacity < Measure
 	%
 	% Fix this Mite
 	%
+	% The list of NodalMemoryCapacity properties is:
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the NodalMemoryCapacity.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the NodalMemoryCapacity.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the NodalMemoryCapacity.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the NodalMemoryCapacity.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the NodalMemoryCapacity.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the NodalMemoryCapacity.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the NodalMemoryCapacity.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
+	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the NodalMemoryCapacity.
+	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>16</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
+	%  <strong>17</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples.
+	%  <strong>18</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the number of tau.
+	%  <strong>19</strong> <strong>N_LOWER</strong> 	N_LOWER (parameter, scalar) is the n lower.
+	%  <strong>20</strong> <strong>DENSITY</strong> 	DENSITY (parameter, scalar) is the density.
+	%
 	% NodalMemoryCapacity methods (constructor):
 	%  NodalMemoryCapacity - constructor
 	%
@@ -91,30 +113,30 @@ classdef NodalMemoryCapacity < Measure
 	%
 	
 	properties (Constant) % properties
-		TRIALS = Measure.getPropNumber() + 1;
+		TRIALS = 16; %CET: Computational Efficiency Trick
 		TRIALS_TAG = 'TRIALS';
-		TRIALS_CATEGORY = Category.PARAMETER;
-		TRIALS_FORMAT = Format.SCALAR;
+		TRIALS_CATEGORY = 3;
+		TRIALS_FORMAT = 11;
 		
-		TRAINING_SAMPLES = Measure.getPropNumber() + 2;
+		TRAINING_SAMPLES = 17; %CET: Computational Efficiency Trick
 		TRAINING_SAMPLES_TAG = 'TRAINING_SAMPLES';
-		TRAINING_SAMPLES_CATEGORY = Category.PARAMETER;
-		TRAINING_SAMPLES_FORMAT = Format.SCALAR;
+		TRAINING_SAMPLES_CATEGORY = 3;
+		TRAINING_SAMPLES_FORMAT = 11;
 		
-		TAU_MAX = Measure.getPropNumber() + 3;
+		TAU_MAX = 18; %CET: Computational Efficiency Trick
 		TAU_MAX_TAG = 'TAU_MAX';
-		TAU_MAX_CATEGORY = Category.PARAMETER;
-		TAU_MAX_FORMAT = Format.SCALAR;
+		TAU_MAX_CATEGORY = 3;
+		TAU_MAX_FORMAT = 11;
 		
-		N_LOWER = Measure.getPropNumber() + 4;
+		N_LOWER = 19; %CET: Computational Efficiency Trick
 		N_LOWER_TAG = 'N_LOWER';
-		N_LOWER_CATEGORY = Category.PARAMETER;
-		N_LOWER_FORMAT = Format.SCALAR;
+		N_LOWER_CATEGORY = 3;
+		N_LOWER_FORMAT = 11;
 		
-		DENSITY = Measure.getPropNumber() + 5;
+		DENSITY = 20; %CET: Computational Efficiency Trick
 		DENSITY_TAG = 'DENSITY';
-		DENSITY_CATEGORY = Category.PARAMETER;
-		DENSITY_FORMAT = Format.SCALAR;
+		DENSITY_CATEGORY = 3;
+		DENSITY_FORMAT = 11;
 	end
 	methods % constructor
 		function m = NodalMemoryCapacity(varargin)
@@ -127,6 +149,27 @@ classdef NodalMemoryCapacity < Measure
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
+			% The list of NodalMemoryCapacity properties is:
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the NodalMemoryCapacity.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the NodalMemoryCapacity.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the NodalMemoryCapacity.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the NodalMemoryCapacity.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the NodalMemoryCapacity.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the NodalMemoryCapacity.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the NodalMemoryCapacity.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
+			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the NodalMemoryCapacity.
+			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>16</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
+			%  <strong>17</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples.
+			%  <strong>18</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the number of tau.
+			%  <strong>19</strong> <strong>N_LOWER</strong> 	N_LOWER (parameter, scalar) is the n lower.
+			%  <strong>20</strong> <strong>DENSITY</strong> 	DENSITY (parameter, scalar) is the density.
 			%
 			% See also Category, Format.
 			
@@ -164,7 +207,7 @@ classdef NodalMemoryCapacity < Measure
 			%
 			% See also subclasses.
 			
-			subclass_list = subclasses('NodalMemoryCapacity', [], [], true);
+			subclass_list = { 'NodalMemoryCapacity' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of nodal memory capacity.
@@ -185,60 +228,30 @@ classdef NodalMemoryCapacity < Measure
 			%
 			% See also getPropNumber, Category.
 			
+			%CET: Computational Efficiency Trick
+			
 			if nargin == 0
-				prop_list = [ ...
-					Measure.getProps() ...
-						NodalMemoryCapacity.TRIALS ...
-						NodalMemoryCapacity.TRAINING_SAMPLES ...
-						NodalMemoryCapacity.TAU_MAX ...
-						NodalMemoryCapacity.N_LOWER ...
-						NodalMemoryCapacity.DENSITY ...
-						];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
 				return
 			end
 			
 			switch category
-				case Category.CONSTANT
-					prop_list = [ ...
-						Measure.getProps(Category.CONSTANT) ...
-						];
-				case Category.METADATA
-					prop_list = [ ...
-						Measure.getProps(Category.METADATA) ...
-						];
-				case Category.PARAMETER
-					prop_list = [ ...
-						Measure.getProps(Category.PARAMETER) ...
-						NodalMemoryCapacity.TRIALS ...
-						NodalMemoryCapacity.TRAINING_SAMPLES ...
-						NodalMemoryCapacity.TAU_MAX ...
-						NodalMemoryCapacity.N_LOWER ...
-						NodalMemoryCapacity.DENSITY ...
-						];
-				case Category.DATA
-					prop_list = [ ...
-						Measure.getProps(Category.DATA) ...
-						];
-				case Category.RESULT
-					prop_list = [
-						Measure.getProps(Category.RESULT) ...
-						];
-				case Category.QUERY
-					prop_list = [ ...
-						Measure.getProps(Category.QUERY) ...
-						];
-				case Category.EVANESCENT
-					prop_list = [ ...
-						Measure.getProps(Category.EVANESCENT) ...
-						];
-				case Category.FIGURE
-					prop_list = [ ...
-						Measure.getProps(Category.FIGURE) ...
-						];
-				case Category.GUI
-					prop_list = [ ...
-						Measure.getProps(Category.GUI) ...
-						];
+				case 1 % Category.CONSTANT
+					prop_list = [1 2 3 9 10 11 12];
+				case 2 % Category.METADATA
+					prop_list = [6 7];
+				case 3 % Category.PARAMETER
+					prop_list = [4 16 17 18 19 20];
+				case 4 % Category.DATA
+					prop_list = [5 13];
+				case 5 % Category.RESULT
+					prop_list = 14;
+				case 6 % Category.QUERY
+					prop_list = 8;
+				case 9 % Category.GUI
+					prop_list = 15;
+				otherwise
+					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -259,7 +272,31 @@ classdef NodalMemoryCapacity < Measure
 			%
 			% See also getProps, Category.
 			
-			prop_number = numel(NodalMemoryCapacity.getProps(varargin{:}));
+			%CET: Computational Efficiency Trick
+			
+			if nargin == 0
+				prop_number = 20;
+				return
+			end
+			
+			switch varargin{1} % category = varargin{1}
+				case 1 % Category.CONSTANT
+					prop_number = 7;
+				case 2 % Category.METADATA
+					prop_number = 2;
+				case 3 % Category.PARAMETER
+					prop_number = 6;
+				case 4 % Category.DATA
+					prop_number = 2;
+				case 5 % Category.RESULT
+					prop_number = 1;
+				case 6 % Category.QUERY
+					prop_number = 1;
+				case 9 % Category.GUI
+					prop_number = 1;
+				otherwise
+					prop_number = 0;
+			end
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in nodal memory capacity/error.
@@ -287,14 +324,14 @@ classdef NodalMemoryCapacity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(prop == NodalMemoryCapacity.getProps());
+			check = prop >= 1 && prop <= 20 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					[BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.WRONG_INPUT], ...
-					[BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.WRONG_INPUT '\n' ...
+					['BRAPH2' ':NodalMemoryCapacity:' 'WrongInput'], ...
+					['BRAPH2' ':NodalMemoryCapacity:' 'WrongInput' '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for NodalMemoryCapacity.'] ...
 					)
 			end
@@ -325,15 +362,14 @@ classdef NodalMemoryCapacity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			nodalmemorycapacity_tag_list = cellfun(@(x) NodalMemoryCapacity.getPropTag(x), num2cell(NodalMemoryCapacity.getProps()), 'UniformOutput', false);
-			check = any(strcmp(tag, nodalmemorycapacity_tag_list));
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'N_LOWER'  'DENSITY' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					[BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.WRONG_INPUT], ...
-					[BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.WRONG_INPUT '\n' ...
+					['BRAPH2' ':NodalMemoryCapacity:' 'WrongInput'], ...
+					['BRAPH2' ':NodalMemoryCapacity:' 'WrongInput' '\n' ...
 					'The value ' tag ' is not a valid tag for NodalMemoryCapacity.'] ...
 					)
 			end
@@ -359,8 +395,7 @@ classdef NodalMemoryCapacity < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				nodalmemorycapacity_tag_list = cellfun(@(x) NodalMemoryCapacity.getPropTag(x), num2cell(NodalMemoryCapacity.getProps()), 'UniformOutput', false);
-				prop = find(strcmp(pointer, nodalmemorycapacity_tag_list)); % tag = pointer
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'N_LOWER'  'DENSITY' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -388,22 +423,9 @@ classdef NodalMemoryCapacity < Measure
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				prop = pointer;
-				
-				switch prop
-					case NodalMemoryCapacity.TRIALS
-						tag = NodalMemoryCapacity.TRIALS_TAG;
-					case NodalMemoryCapacity.TRAINING_SAMPLES
-						tag = NodalMemoryCapacity.TRAINING_SAMPLES_TAG;
-					case NodalMemoryCapacity.TAU_MAX
-						tag = NodalMemoryCapacity.TAU_MAX_TAG;
-					case NodalMemoryCapacity.N_LOWER
-						tag = NodalMemoryCapacity.N_LOWER_TAG;
-					case NodalMemoryCapacity.DENSITY
-						tag = NodalMemoryCapacity.DENSITY_TAG;
-					otherwise
-						tag = getPropTag@Measure(prop);
-				end
+				%CET: Computational Efficiency Trick
+				nodalmemorycapacity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'N_LOWER'  'DENSITY' };
+				tag = nodalmemorycapacity_tag_list{pointer}; % prop = pointer
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -428,20 +450,9 @@ classdef NodalMemoryCapacity < Measure
 			
 			prop = NodalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop
-				case NodalMemoryCapacity.TRIALS
-					prop_category = NodalMemoryCapacity.TRIALS_CATEGORY;
-				case NodalMemoryCapacity.TRAINING_SAMPLES
-					prop_category = NodalMemoryCapacity.TRAINING_SAMPLES_CATEGORY;
-				case NodalMemoryCapacity.TAU_MAX
-					prop_category = NodalMemoryCapacity.TAU_MAX_CATEGORY;
-				case NodalMemoryCapacity.N_LOWER
-					prop_category = NodalMemoryCapacity.N_LOWER_CATEGORY;
-				case NodalMemoryCapacity.DENSITY
-					prop_category = NodalMemoryCapacity.DENSITY_CATEGORY;
-				otherwise
-					prop_category = getPropCategory@Measure(prop);
-			end
+			%CET: Computational Efficiency Trick
+			nodalmemorycapacity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3  3  3  3  3 };
+			prop_category = nodalmemorycapacity_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -465,20 +476,9 @@ classdef NodalMemoryCapacity < Measure
 			
 			prop = NodalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop
-				case NodalMemoryCapacity.TRIALS
-					prop_format = NodalMemoryCapacity.TRIALS_FORMAT;
-				case NodalMemoryCapacity.TRAINING_SAMPLES
-					prop_format = NodalMemoryCapacity.TRAINING_SAMPLES_FORMAT;
-				case NodalMemoryCapacity.TAU_MAX
-					prop_format = NodalMemoryCapacity.TAU_MAX_FORMAT;
-				case NodalMemoryCapacity.N_LOWER
-					prop_format = NodalMemoryCapacity.N_LOWER_FORMAT;
-				case NodalMemoryCapacity.DENSITY
-					prop_format = NodalMemoryCapacity.DENSITY_FORMAT;
-				otherwise
-					prop_format = getPropFormat@Measure(prop);
-			end
+			%CET: Computational Efficiency Trick
+			nodalmemorycapacity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  11  11  11  11  11 };
+			prop_format = nodalmemorycapacity_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -502,44 +502,9 @@ classdef NodalMemoryCapacity < Measure
 			
 			prop = NodalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop
-				case NodalMemoryCapacity.TRIALS
-					prop_description = 'TRIALS (parameter, scalar) is the number of trials.';
-				case NodalMemoryCapacity.TRAINING_SAMPLES
-					prop_description = 'TRAINING_SAMPLES (parameter, scalar) is the number of training samples.';
-				case NodalMemoryCapacity.TAU_MAX
-					prop_description = 'TAU_MAX (parameter, scalar) is the number of tau.';
-				case NodalMemoryCapacity.N_LOWER
-					prop_description = 'N_LOWER (parameter, scalar) is the n lower.';
-				case NodalMemoryCapacity.DENSITY
-					prop_description = 'DENSITY (parameter, scalar) is the density.';
-				case NodalMemoryCapacity.ELCLASS
-					prop_description = 'ELCLASS (constant, string) is the class of the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.NAME
-					prop_description = 'NAME (constant, string) is the name of the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.DESCRIPTION
-					prop_description = 'DESCRIPTION (constant, string) is the description of the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.TEMPLATE
-					prop_description = 'TEMPLATE (parameter, item) is the template of the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.ID
-					prop_description = 'ID (data, string) is a few-letter code of the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.LABEL
-					prop_description = 'LABEL (metadata, string) is an extended label of the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.NOTES
-					prop_description = 'NOTES (metadata, string) are some specific notes about the NodalMemoryCapacity.';
-				case NodalMemoryCapacity.SHAPE
-					prop_description = 'SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.';
-				case NodalMemoryCapacity.SCOPE
-					prop_description = 'SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.';
-				case NodalMemoryCapacity.PARAMETRICITY
-					prop_description = 'PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.';
-				case NodalMemoryCapacity.COMPATIBLE_GRAPHS
-					prop_description = 'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.';
-				case NodalMemoryCapacity.M
-					prop_description = 'M (result, cell) is the NodalMemoryCapacity.';
-				otherwise
-					prop_description = getPropDescription@Measure(prop);
-			end
+			%CET: Computational Efficiency Trick
+			nodalmemorycapacity_description_list = { 'ELCLASS (constant, string) is the class of the NodalMemoryCapacity.'  'NAME (constant, string) is the name of the NodalMemoryCapacity.'  'DESCRIPTION (constant, string) is the description of the NodalMemoryCapacity.'  'TEMPLATE (parameter, item) is the template of the NodalMemoryCapacity.'  'ID (data, string) is a few-letter code of the NodalMemoryCapacity.'  'LABEL (metadata, string) is an extended label of the NodalMemoryCapacity.'  'NOTES (metadata, string) are some specific notes about the NodalMemoryCapacity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the NodalMemoryCapacity.'  'PFM (gui, item) contains the panel figure of the measure.'  'TRIALS (parameter, scalar) is the number of trials.'  'TRAINING_SAMPLES (parameter, scalar) is the number of training samples.'  'TAU_MAX (parameter, scalar) is the number of tau.'  'N_LOWER (parameter, scalar) is the n lower.'  'DENSITY (parameter, scalar) is the density.' };
+			prop_description = nodalmemorycapacity_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -563,18 +528,18 @@ classdef NodalMemoryCapacity < Measure
 			
 			prop = NodalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop
-				case NodalMemoryCapacity.TRIALS
-					prop_settings = Format.getFormatSettings(Format.SCALAR);
-				case NodalMemoryCapacity.TRAINING_SAMPLES
-					prop_settings = Format.getFormatSettings(Format.SCALAR);
-				case NodalMemoryCapacity.TAU_MAX
-					prop_settings = Format.getFormatSettings(Format.SCALAR);
-				case NodalMemoryCapacity.N_LOWER
-					prop_settings = Format.getFormatSettings(Format.SCALAR);
-				case NodalMemoryCapacity.DENSITY
-					prop_settings = Format.getFormatSettings(Format.SCALAR);
-				case NodalMemoryCapacity.TEMPLATE
+			switch prop %CET: Computational Efficiency Trick
+				case 16 % NodalMemoryCapacity.TRIALS
+					prop_settings = Format.getFormatSettings(11);
+				case 17 % NodalMemoryCapacity.TRAINING_SAMPLES
+					prop_settings = Format.getFormatSettings(11);
+				case 18 % NodalMemoryCapacity.TAU_MAX
+					prop_settings = Format.getFormatSettings(11);
+				case 19 % NodalMemoryCapacity.N_LOWER
+					prop_settings = Format.getFormatSettings(11);
+				case 20 % NodalMemoryCapacity.DENSITY
+					prop_settings = Format.getFormatSettings(11);
+				case 4 % NodalMemoryCapacity.TEMPLATE
 					prop_settings = 'NodalMemoryCapacity';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
@@ -602,38 +567,38 @@ classdef NodalMemoryCapacity < Measure
 			
 			prop = NodalMemoryCapacity.getPropProp(pointer);
 			
-			switch prop
-				case NodalMemoryCapacity.TRIALS
+			switch prop %CET: Computational Efficiency Trick
+				case 16 % NodalMemoryCapacity.TRIALS
 					prop_default = 10;
-				case NodalMemoryCapacity.TRAINING_SAMPLES
+				case 17 % NodalMemoryCapacity.TRAINING_SAMPLES
 					prop_default = 20000;
-				case NodalMemoryCapacity.TAU_MAX
+				case 18 % NodalMemoryCapacity.TAU_MAX
 					prop_default = 50;
-				case NodalMemoryCapacity.N_LOWER
+				case 19 % NodalMemoryCapacity.N_LOWER
 					prop_default = 1;
-				case NodalMemoryCapacity.DENSITY
+				case 20 % NodalMemoryCapacity.DENSITY
 					prop_default = 1;
-				case NodalMemoryCapacity.ELCLASS
+				case 1 % NodalMemoryCapacity.ELCLASS
 					prop_default = 'NodalMemoryCapacity';
-				case NodalMemoryCapacity.NAME
+				case 2 % NodalMemoryCapacity.NAME
 					prop_default = 'NodalMemoryCapacity';
-				case NodalMemoryCapacity.DESCRIPTION
+				case 3 % NodalMemoryCapacity.DESCRIPTION
 					prop_default = 'Fix this Mite';
-				case NodalMemoryCapacity.TEMPLATE
-					prop_default = Format.getFormatDefault(Format.ITEM, NodalMemoryCapacity.getPropSettings(prop));
-				case NodalMemoryCapacity.ID
+				case 4 % NodalMemoryCapacity.TEMPLATE
+					prop_default = Format.getFormatDefault(8, NodalMemoryCapacity.getPropSettings(prop));
+				case 5 % NodalMemoryCapacity.ID
 					prop_default = 'NodalMemoryCapacity ID';
-				case NodalMemoryCapacity.LABEL
+				case 6 % NodalMemoryCapacity.LABEL
 					prop_default = 'NodalMemoryCapacity label';
-				case NodalMemoryCapacity.NOTES
+				case 7 % NodalMemoryCapacity.NOTES
 					prop_default = 'NodalMemoryCapacity notes';
-				case NodalMemoryCapacity.SHAPE
-					prop_default = Measure.NODAL;
-				case NodalMemoryCapacity.SCOPE
-					prop_default = Measure.UNILAYER;
-				case NodalMemoryCapacity.PARAMETRICITY
-					prop_default = Measure.NONPARAMETRIC;
-				case NodalMemoryCapacity.COMPATIBLE_GRAPHS
+				case 9 % NodalMemoryCapacity.SHAPE
+					prop_default = 2;
+				case 10 % NodalMemoryCapacity.SCOPE
+					prop_default = 2;
+				case 11 % NodalMemoryCapacity.PARAMETRICITY
+					prop_default = 2;
+				case 12 % NodalMemoryCapacity.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWU'};
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
@@ -680,15 +645,15 @@ classdef NodalMemoryCapacity < Measure
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: €BRAPH2.STR€:NodalMemoryCapacity:€BRAPH2.WRONG_INPUT€
+			%  Error id: BRAPH2:NodalMemoryCapacity:WrongInput
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: €BRAPH2.STR€:NodalMemoryCapacity:€BRAPH2.WRONG_INPUT€
+			%   Error id: BRAPH2:NodalMemoryCapacity:WrongInput
 			%  Element.CHECKPROP(NodalMemoryCapacity, PROP, VALUE) throws error if VALUE has not a valid format for PROP of NodalMemoryCapacity.
-			%   Error id: €BRAPH2.STR€:NodalMemoryCapacity:€BRAPH2.WRONG_INPUT€
+			%   Error id: BRAPH2:NodalMemoryCapacity:WrongInput
 			%  M.CHECKPROP(NodalMemoryCapacity, PROP, VALUE) throws error if VALUE has not a valid format for PROP of NodalMemoryCapacity.
-			%   Error id: €BRAPH2.STR€:NodalMemoryCapacity:€BRAPH2.WRONG_INPUT€]
+			%   Error id: BRAPH2:NodalMemoryCapacity:WrongInput]
 			% 
 			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('NodalMemoryCapacity')
 			%  are less computationally efficient.
@@ -699,20 +664,20 @@ classdef NodalMemoryCapacity < Measure
 			prop = NodalMemoryCapacity.getPropProp(pointer);
 			
 			switch prop
-				case NodalMemoryCapacity.TRIALS % __NodalMemoryCapacity.TRIALS__
-					check = Format.checkFormat(Format.SCALAR, value, NodalMemoryCapacity.getPropSettings(prop));
-				case NodalMemoryCapacity.TRAINING_SAMPLES % __NodalMemoryCapacity.TRAINING_SAMPLES__
-					check = Format.checkFormat(Format.SCALAR, value, NodalMemoryCapacity.getPropSettings(prop));
-				case NodalMemoryCapacity.TAU_MAX % __NodalMemoryCapacity.TAU_MAX__
-					check = Format.checkFormat(Format.SCALAR, value, NodalMemoryCapacity.getPropSettings(prop));
-				case NodalMemoryCapacity.N_LOWER % __NodalMemoryCapacity.N_LOWER__
-					check = Format.checkFormat(Format.SCALAR, value, NodalMemoryCapacity.getPropSettings(prop));
-				case NodalMemoryCapacity.DENSITY % __NodalMemoryCapacity.DENSITY__
-					check = Format.checkFormat(Format.SCALAR, value, NodalMemoryCapacity.getPropSettings(prop));
-				case NodalMemoryCapacity.TEMPLATE % __NodalMemoryCapacity.TEMPLATE__
-					check = Format.checkFormat(Format.ITEM, value, NodalMemoryCapacity.getPropSettings(prop));
+				case 16 % NodalMemoryCapacity.TRIALS
+					check = Format.checkFormat(11, value, NodalMemoryCapacity.getPropSettings(prop));
+				case 17 % NodalMemoryCapacity.TRAINING_SAMPLES
+					check = Format.checkFormat(11, value, NodalMemoryCapacity.getPropSettings(prop));
+				case 18 % NodalMemoryCapacity.TAU_MAX
+					check = Format.checkFormat(11, value, NodalMemoryCapacity.getPropSettings(prop));
+				case 19 % NodalMemoryCapacity.N_LOWER
+					check = Format.checkFormat(11, value, NodalMemoryCapacity.getPropSettings(prop));
+				case 20 % NodalMemoryCapacity.DENSITY
+					check = Format.checkFormat(11, value, NodalMemoryCapacity.getPropSettings(prop));
+				case 4 % NodalMemoryCapacity.TEMPLATE
+					check = Format.checkFormat(8, value, NodalMemoryCapacity.getPropSettings(prop));
 				otherwise
-					if prop <= Measure.getPropNumber()
+					if prop <= 15
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -721,8 +686,8 @@ classdef NodalMemoryCapacity < Measure
 				prop_check = check;
 			elseif ~check
 				error( ...
-					[BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.WRONG_INPUT], ...
-					[BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.WRONG_INPUT '\n' ...
+					['BRAPH2' ':NodalMemoryCapacity:' 'WrongInput'], ...
+					['BRAPH2' ':NodalMemoryCapacity:' 'WrongInput' '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' NodalMemoryCapacity.getPropTag(prop) ' (' NodalMemoryCapacity.getFormatTag(NodalMemoryCapacity.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -733,20 +698,20 @@ classdef NodalMemoryCapacity < Measure
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with Category.RESULT,
-			%  Category.QUERY, and Category.EVANESCENT. By default this function
+			%  PROP. It works only with properties with 5,
+			%  6, and 7. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  Category.QUERY.
+			%  6.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case NodalMemoryCapacity.M % __NodalMemoryCapacity.M__
-					rng_settings_ = rng(); rng(m.getPropSeed(NodalMemoryCapacity.M), 'twister')
+				case 14 % NodalMemoryCapacity.M
+					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					tmp_data = g.get('A'); % cell with the subjects data
@@ -832,7 +797,7 @@ classdef NodalMemoryCapacity < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= Measure.getPropNumber()
+					if prop <= 15
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});
