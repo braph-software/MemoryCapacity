@@ -111,6 +111,8 @@ if ~exist(target_dir, 'dir')
 
     addpath(target_dir)
 
+    delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_analysis_wu.braph2'])
+    delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_comparison_wu.braph2'])
     delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_analysis_bud.braph2'])
     delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_analysis_but.braph2'])
     delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_comparison_bud.braph2'])

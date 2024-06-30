@@ -1,4 +1,4 @@
-%% Pipeline Connectivity Analysis WU
+%% Pipeline Memory Capacity Analysis WU
 
 % This is the pipeline script to analyze a group of subjects using connectivity data and a weighted undirected graph.
 % The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI).
@@ -17,3 +17,7 @@ gr = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('
 
 %% Analysis
 a_WU = AnalyzeEnsemble_CON_WU('GR', gr); % Analyze Group % Group Analysis
+
+%% Memory Capacity (MC)
+gmc = a_WU.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M'); % Calculate Global MC % Global MC
+nmc = a_WU.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M'); % Calculate Nodal MC % Nodal MC
