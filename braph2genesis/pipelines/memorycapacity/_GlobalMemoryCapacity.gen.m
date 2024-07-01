@@ -197,16 +197,12 @@ for trial = 1:1:trials
     data_alltrial_MCs{1, trial} = MCs_tau_sub;
 end
 
-% split
-for i = 1:size(data, 2)
-    tmp_layer_val{i} = cellfun(@(x) x(:,i), data_alltrial_MCs, 'UniformOutput',false);
-end
-
-%average
-for i = 1:size(data, 2)
-    tmp_trials = tmp_layer_val{i};
-    mean_val_layer{i} =  mean(cat(ndims(tmp_trials{1}) + 1, tmp_trials{:}), ndims(tmp_trials{1}) + 1);
-end
+    % Extract the values as average of all trials
+    MC_values = zeros(size(data_alltrial_MCs(1)));
+    for i_trial = 1:1:length(data_alltrial_MCs)
+        MC_values = MC_values + data_alltrial_MCs{i_trial};
+    end
+    MC_values = MC_values ./ length(data_trial);  % calculate average
 
 value = transpose(sum(MC_values,1));
 

@@ -2,7 +2,11 @@
 NodalMemoryCapacity < Measure (m, nodal memory capacity) is the graph NodalMemoryCapacity.
 
 %%% ¡description!
-Fix this Mite
+The nodal memory capacity measures how well a given node manages to encode a random input signal applied to itself.
+This nodal memory capacity is determined by training the nodal output to reproduce delayed input time series 
+and comparing the delayed input with the reservoir output across the given node. 
+A high memory capacity indicates that the node has high capacity to remember and process the temporal 
+information contained in the input signal applied to this node. 
 
 %% ¡layout!
 
@@ -46,7 +50,7 @@ Measure TAU_MAX
 %%%% ¡id!
 NodalMemoryCapacity.N_LOWER
 %%%% ¡title!
-Measure N_LOWER
+Measure DATA_DIMENSION
 
 %%% ¡prop!
 %%%% ¡id!
@@ -93,7 +97,7 @@ NAME (constant, string) is the name of the NodalMemoryCapacity.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the NodalMemoryCapacity.
 %%%% ¡default!
-'Fix this Mite'
+'Nodal memory capacity is calculated using reservoir computing, which is is a recurrent neural-network model. More details about the calculation can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the NodalMemoryCapacity.
@@ -138,8 +142,8 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%% ¡prop!
 M (result, cell) is the NodalMemoryCapacity.
 %%%% ¡calculate!
-g = m.get('G'); % graph from measure class
-tmp_data = g.get('A'); % cell with the subjects data
+g = m.get('G');  % graph from measure class
+tmp_data = g.get('A');  % cell with the subjects data
 if isempty(tmp_data)
     value = {};
     return;
@@ -153,32 +157,26 @@ global_mc = cell(g.get('LAYERNUMBER'), 1);
 trials = m.get('TRIALS');
 T = m.get('TRAINING_SAMPLES');
 tau_max = m.get('TAU_MAX');
-
 N = size(data{1}, 1);
 n = m.get('N_LOWER');
 density = m.get('DENSITY');
 
 % initialize
-% Number of subjects
-subjects = size(data, 2);
-% Initialize structure - each element holds data for each trial
-data_alltrial_MCs = cell(1, trials);
+subjects = size(data, 2);  % Number of subjects
+data_alltrial_MCs = cell(1, trials);  % Initialize structure - each element holds data for each trial
 
 for trial = 1:1:trials
-    % input data
-    input_data = rand(1, T);
-
+    input_data = rand(1, T);  % input data
+    
     % input-to-reservoir weight matrix
     W_in = normrnd(0, 1, N, n);
     Wsing = svd(W_in);
     W_in = W_in * (1 / Wsing); % Set maximal singular value of W_in to 1
 
-    % Initialize array to hold tau values for all subjects for this trial
-    MCs_tau_sub = zeros(tau_max, N, subjects);
-
+    MCs_tau_sub = zeros(tau_max, N, subjects);  % Initialize array for MC for all subjects at given tau
+     
     for subject = 1:1:subjects
-        % Get the data for the corresponding subject
-        W = data{1, subject};
+        W = data{1, subject};  % Data for the corresponding subject
 
         % Skip matrices with NaN values
         if ~isempty(find(isnan(W)))
@@ -206,40 +204,37 @@ for trial = 1:1:trials
     data_alltrial_MCs{1, trial} = MCs_tau_sub;
 end
 
-% split
-for i = 1:size(data, 2)
-    tmp_layer_val{i} = cellfun(@(x) x(:,:,i), data_alltrial_MCs, 'UniformOutput',false);
+% Average across the trials
+MC_values = zeros(N, subjects);
+MC_tmp = zeros(size(data_alltrial_MCs{1}));
+for i_trial = 1:1:length(data_alltrial_MCs)
+    MC_tmp = MC_tmp + data_alltrial_MCs{i_trial};
+end
+MC_tmp = MC_tmp ./ length(data_alltrial_MCs);
+
+for i_sub = 1:1:subjects
+    % matrix for each subject
+    tmp_submatrix = MC_tmp(:,:, i_sub);
+    MC_values(:, i_sub) = sum(tmp_submatrix, 1)';
 end
 
-% average
-for i = 1:size(data, 2)
-    tmp_trials = tmp_layer_val{i};
-    mean_val_layer{i} =  mean(cat(ndims(tmp_trials{1}) + 1, tmp_trials{:}), ndims(tmp_trials{1}) + 1);
-end
-
-value = mean_val_layer;
+value = MC_values;
 %%%% ¡calculate_callbacks!
-function MC_tau = calculate_MCnodal(W,W_in,tau_max,input_data, ridge,verbose)
-    % Network dimension
-    N = size(W, 1);
-    
-    % Parameters
-    T = size(input_data, 2); % Training samples
-    TRANSIENT = floor(0.05 * T); % Transient so that reservoir dynamics are not affected by initial value
+function MC_tau = calculate_MCnodal(W, W_in, tau_max, input_data, ridge, verbose)
+    N = size(W, 1);  % Network dimension
+    T = size(input_data, 2);  % Training samples
+    TRANSIENT = floor(0.05 * T);  % Transient so that reservoir dynamics are not affected by initial value
     
     % Initialize training data
     X = input_data;
     X_train = X(1, tau_max + 1:end); % Train reservoir on data starting from tau_max + 1
     T_train = size(X_train, 2);
     
-    % Set activation function
-    % tanh
-    
     % Initialize reservoir states
     r = zeros(N, 1);
     R = zeros(N, T_train);
     
-    % Run dynamics and save reservoir states
+    % Run dynamics
     for t = 1:1:T_train
         b = W * r + W_in * X_train(t);
     
@@ -248,11 +243,8 @@ function MC_tau = calculate_MCnodal(W,W_in,tau_max,input_data, ridge,verbose)
     end
     
     % Train network for different delays
-    % MC_tau will be number of delays x number of nodes array
-    MC_tau = zeros(tau_max, N);
+    MC_tau = zeros(tau_max, N);  % Initialize MC_tau: no delays x no of nodes
     tau_idx = 1;
-    
-    % for loop to come here
     for tau = tau_max:-1:1
         % Set target to be training data shifted by tau back in time
         y = X(1, tau : 1 : (T - (tau_max - tau) - 1));
@@ -261,15 +253,14 @@ function MC_tau = calculate_MCnodal(W,W_in,tau_max,input_data, ridge,verbose)
         y_f = y(1, TRANSIENT:1:end);
         R_tmp = R(:, TRANSIENT:1:end);
     
-        % Loop over each node and get the output from that node to reconstruct
+        % Consider each node
         for i_node = 1:1:N
             % output corresponding to this node
             R_f = R_tmp(i_node, :);
     
-            % Compute W_out for given delay tau using
-            % ridge regression (linear regression if ridge = 0)
+            % Compute W_out for given delay tau using ridge regression (linear regression if ridge = 0)
             term_A = y_f * R_f';
-            term_B = pinv(R_f * R_f', 1e-15); % remove the rigde term for nodal
+            term_B = pinv(R_f * R_f', 1e-15);  % remove the rigde term for nodal
             W_out = term_A * term_B;
     
             % Compute output of reservoir using W_out
@@ -293,17 +284,17 @@ TRIALS (parameter, scalar) is the number of trials.
 10
 
 %%% ¡prop!
-TRAINING_SAMPLES (parameter, scalar) is the number of training samples.
+TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).
 %%%% ¡default!
 20000
 
 %%% ¡prop!
-TAU_MAX (parameter, scalar) is the number of tau.
+TAU_MAX (parameter, scalar) is the maximum delay to be considered.
 %%%% ¡default!
 50
 
 %%% ¡prop!
-N_LOWER (parameter, scalar) is the n lower.
+N_LOWER (parameter, scalar) is the dimension of the data (number of nodes for nodal memory capacity).
 %%%% ¡default!
 1
 
