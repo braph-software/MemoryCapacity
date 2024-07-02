@@ -148,4 +148,7 @@ if ~exist(target_dir, 'dir')
     %test_braph2
     test_GlobalMemoryCapacity
     test_NodalMemoryCapacity
+
+    % remove genesis directory
+    rmdir('braph2genesis', 's')
 end
