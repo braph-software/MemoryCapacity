@@ -23,11 +23,11 @@ The braph2memorycapacity folder contains a fully compiled, mimimal version of BR
 3.  BRAPH 2.0 software is now fully loaded and ready to use. The calculation of memory capacity can be performed in 3 steps:
 4.  Step 1: Load brain atlas.
    Braph atlas can be loaded by executing the following code:
+
 "<code>  im_ba = ImporterBrainAtlasXLS( ...
     'FILE', [memory_example_path filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
-
 ba = im_ba.get('BA'); </code> "
 
     
