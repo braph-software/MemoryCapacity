@@ -42,7 +42,6 @@ Subjects can be loaded using the following:
     'BA', ba, ...
     'WAITBAR', true ...
     );
-
 gr1 = im_gr1.get('GR');
 </code>
 
