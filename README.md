@@ -26,28 +26,42 @@ The braph2memorycapacity folder contains a fully compiled, mimimal version of BR
 
  
 <code>im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [memory_example_path filesep 'atlas.xlsx'], ...
+    'FILE', ['atlas.xlsx'], ...
     'WAITBAR', true ...
     );
 ba = im_ba.get('BA'); 
 </code>
 
-For more information about brain atlases, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba), as well as the folder [atlases](https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases) where you can find several already prepared atlases ready to use with BRAPH 2.0.
+The above code load the atlas in atlas.xlsx file. A custom atlas can be uploaded by changing the file name, please ensure that your atlas is also in the .xlsx format. For more information about how to create brain atlas file, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba), as well as the folder [atlases](https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases) where you can find several already prepared atlases ready to use with BRAPH 2.0.
 
-6.  Step 2: Load group of subjects
+6.  Step 2: Load group of subjects.
 Subjects can be loaded using the following:
 
 <code>im_gr1 = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [memory_example_path filesep 'MC_Group_1_XLS'], ...
+    'DIRECTORY', ['MC_Group_1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 gr1 = im_gr1.get('GR');
 </code>
 
-8.
+The data for all subjects should be contained in a single folder (in this example named MC_Group_1_XLS). Each subject's connectivity matrix should be contained in a single, separate Excel file. For more information about how to create subject files, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con).
+
+7. Step 3: Create an analysis and calculate group average values.
+This step can be performed using the following code:
+
+<code>analysis_MC = AnalyzeEnsemble_CON_WU( ...
+    'GR', gr1 ...
+    );
+
+% measure calculation at group level
+global_memorycapacity = analysis_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+nodal_memorycapacity = analysis_MC.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+</code>
+
 9.
-10.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
+10.
+11.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
 
 ### BRAPH 2.0 tutorials
 
