@@ -24,11 +24,13 @@ The braph2memorycapacity folder contains a fully compiled, mimimal version of BR
 4.  Step 1: Load brain atlas.
    Braph atlas can be loaded by executing the following code:
 
-"<code>  im_ba = ImporterBrainAtlasXLS( ...
+<code>  
+im_ba = ImporterBrainAtlasXLS( ...
     'FILE', [memory_example_path filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
-ba = im_ba.get('BA'); </code> "
+ba = im_ba.get('BA'); 
+</code>
 
     
 6.  
