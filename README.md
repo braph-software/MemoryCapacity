@@ -8,9 +8,9 @@
 
 
 ## BRAPH 2.0 Memory Capacity
-The **BRAPH 2.0 Memory Capacity** is a pipeline that implements the reservoir computing paradigm, enabling the calculation of both global and regional memory capacity. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2024).
+The **BRAPH 2.0 Memory Capacity** is a pipeline that uses the reservoir computing faramework to calculate both global and regional memory capacity. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2024).
 
-### Code Implementation
+## Code Implementation
 The codes implementing the global and regional memory capacity are located in the [braph2mc/pipelines/MemoryCapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity) folder.
 
 ### Usage of the “MemoryCapacity” Pipeline
