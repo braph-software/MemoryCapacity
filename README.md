@@ -32,7 +32,7 @@ The braph2memorycapacity folder contains a fully compiled, mimimal version of BR
 ba = im_ba.get('BA'); 
 </code>
 
-    
+For more information about brain atlases, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba), as well as the folder [atlases](https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases) where you can find several already prepared atlases ready to use with BRAPH 2.0.
 6.  
 7.
 8.
