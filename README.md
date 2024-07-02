@@ -18,6 +18,11 @@ Both measures have been implemented within a single pipeline that is fully integ
 ## Usage of the “MemoryCapacity” Pipeline
 The braph2memorycapacity folder contains a fully compiled, mimimal version of BRAPH 2.0 that calculates the global and regional memory capacity. This version of BRAPH 2.0 contains only one pipeline, which allows the user to upload brain atlas, to upload subjects with connectivity matrices, and to calculate the memory capacity for each subject. This pipeline can be used both from  MATLAB command line or through the Graphical User Interfaces. 
 
+#### Example
+An example dataset that will allow the user to perform the following steps can be created by running the script [create_data_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/memorycapacity/create_data_memorycapacity.m). This script will create two groups of subjects and the associated atlas files. Each subject has a weighted random connectivity matrix with a mean nodal degree of 4, which has been derived using the Watts–Strogatz model (group 1 uses a rewiring probability of 0.3 and group 2 has a rewiring probability of 0.85). After running the code, the data will be created in braph2memorycapacity/pipelines/memorycapacity/Example Data memory capacity.
+
+After creating the example data, run [example_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2memorycapacity/pipelines/memorycapacity/example_memorycapacity.m). This is an example script demonstrating how to perform steps 4-8 in the following section.
+
 ### Usage through MATLAB command line (suggested use)
 1.	<b>Open</b> the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity) folder. 
 2.	<b>Execute</b> the [braph2.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2memorycapacity/braph2.m) script in MATLAB. This script loads BRAPH 2.0 and all related dependencies. 
@@ -68,12 +73,6 @@ end
 </code>
 The individual values are stored in "global_memorycapacity_subject" and "nodal_memorycapacity_subject" cell arrays, where each cell holds the data for individual subjects.
 
-#### Example
-
-1. An example dataset that will allow the user to perform these steps can be created by running the script [create_data_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/memorycapacity/create_data_memorycapacity.m). This script will create two groups of subjects and the associated atlas files. Each subject has a weighted random connectivity matrix with a mean nodal degree of 4, which has been derived using the Watts–Strogatz model (group 1 uses a rewiring probability of 0.3 and group 2 has a rewiring probability of 0.85). After running the code, the data will be created in braph2memorycapacity/pipelines/memorycapacity/Example Data memory capacity.
-2. After creating the example data, run [example_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2memorycapacity/pipelines/memorycapacity/example_memorycapacity.m). This is an example file demonstrating how to perform steps 4-8 above.
-
-
 ### Usage through BRAPH 2.0 Graphical User Inerfaces
 The Memory capacity pipeline can also be used via the graphical interfaces integrated within BRAPH 2.0. Currently, the interfaces allow the calculation and plotting of group averaged global and nodal memory capacitie (single subject calculations can only be performed through the command line). 
 1. <b>Open</b> the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity) folder. 
@@ -81,7 +80,7 @@ The Memory capacity pipeline can also be used via the graphical interfaces integ
 3.	On the main GUI, <b>select</b> the "Pipeline Memory Capacity Analysis WU" and <b>open</b> this pipeline by pressing the button <button>"Open Pipeline Memory Capacity Analysis WU ..."</button>.
 4.	<b>This action opens an interface</b> with different sections that will guide the user through the different steps of the analyses (defining and ploting brain atlas, uploading a group, defining an analysis, and calculating the measures).
 
-#### BRAPH 2.0 tutorials
+## BRAPH 2.0 tutorials
 
 This pipeline utilizes the full functionalities of the BRAPH 2.0 software (http://braph.org/). More information about the analysis and how to use the inferfaces can be found in the main [BRAPH 2.0](https://github.com/braph-software/BRAPH-2/tree/develop) repository. The full tutorials are available [here](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials). Please consider one of the [Tutorials for Graph Theory Analysis Pipelines](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/pipelines#single-layer-connectivity-pipelines) for more information on how to use the Memory Capacity pipeline.  
 
