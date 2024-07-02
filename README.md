@@ -14,10 +14,10 @@ The **BRAPH 2.0 Memory Capacity** is a pipeline that uses the reservoir computin
 The codes implementing the global and regional memory capacity are located in the [braph2mc/pipelines/MemoryCapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity) folder. 
 Both measures have been implemented within a single pipeline that is fully integrated in BRAPH 2.0 software.
 
-### Usage of the “MemoryCapacity” Pipeline
+## Usage of the “MemoryCapacity” Pipeline
 The braph2memorycapacity folder contains a fully compiled, mimimal version of BRAPH 2.0 that calculates the memory capacity. This version of BRAPH 2.0 contains only one pipeline, that allows the user to upload brain atlas, to upload subjects with connectivity matrices, and to calculate the memory capacity for each subject. This pipeline can be used both from  MATLAB command line or through the Graphical User Interfaces. To use the pipeline, follow these steps:
 
-## Usage through MATLAB command line (suggested use)
+### Usage through MATLAB command line (suggested use)
 1.	Open the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity) folder. 
 2.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB. This script loads BRAPH 2.0 and all related dependencies. 
 3.  BRAPH 2.0 software is now fully loaded and ready to use. The calculation of memory capacity can be performed in 3 steps:
@@ -74,19 +74,24 @@ The individual values are stored in global_memorycapacity_subject and nodal_memo
 
 9. An example data that will allow the user to perform these steps can be created by running the script [create_data_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/gv/memorycapacity/create_data_memorycapacity.m). This script will create two groups of subjects and the associated atlas files. Each subject has a weighted random connectivity matrix with a mean nodal degree of 4, which has been derived using the Watts–Strogatz model (group 1 uses a rewiring probability of 0.3 and group 2 has a rewiring probability of 0.85). After running the code, the data will be created in braph2memorycapacity/pipelines/memorycapacity/Example Data memory capacity.
 10. The code [example_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/gv/memorycapacity/example_memorycapacity.m) shows an example of the usage of the memory capacity pipeline on this example data.
-11.
-12.
-13.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
+### Example
+1. Create dataset (if you haven't done so) by running [create_data_Memory_Capacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/pipelines/MemoryCapacity/create_data_Memory_Capacity.m). This will create the folder [Example data Memory Capacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity/Example%20data%20Memory%20Capacity) (already included in the compiled version under [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc) folder.
+2. Run [example_MemoryCapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/example_MemoryCapacity.m). It is an example file demonstrating how to use the MemoryCapacity pipeline. It can be found in the same directory.
+
+
+### Usage through BRAPH 2.0 Graphical User Inerfaces
+The Memory capacity pipeline can also be used via the graphical interfaces integrated within BRAPH 2.0. Currently, the interfaces allow the calculation and plotting of group averaged global and nodal memory capacitie (single subject calculations can only be performed through the command line. 
+1.	Open the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity) folder. 
+2.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB. This script loads BRAPH 2.0 and all related dependencies.
+3.	The initial GUI will show only one pipeline ("Pipeline"). Select this pipeline and open it by pressing the button:
+4.	This will open an interface with different sections that guide the user through the different steps of the analyses (defining and ploting brain atlas, uploading a group, defining an analysis, and calculating the measures. w
 
 ### BRAPH 2.0 tutorials
 
 This pipeline utilizes the full functionalities of the BRAPH 2.0 software. For more information on how to use BRAPH 2.0, please refer to the [BRAPH 2.0 Tutorials](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials). More information about BRAPH 2.0 can be found both in the [BRAPH 2.0 repository](https://github.com/braph-software/BRAPH-2/tree/develop) and http://braph.org/.
 
-### Example
-1. Create dataset (if you haven't done so) by running [create_data_Memory_Capacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/pipelines/MemoryCapacity/create_data_Memory_Capacity.m). This will create the folder [Example data Memory Capacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity/Example%20data%20Memory%20Capacity) (already included in the compiled version under [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc) folder.
-2. Run [example_MemoryCapacity.m](https://github.com/braph-software/MemoryCapacity/blob/develop/example_MemoryCapacity.m). It is an example file demonstrating how to use the MemoryCapacity pipeline. It can be found in the same directory.
 
-### Software compilation
+## Software compilation
 
 The compiled version of the software is already provided in this repository under "braph2mc" folder. However, if you would like to compile the software again (e.g., after implementing new functionalities in BRAPH 2.0) you will need to run [braph2genesis.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2genesis/braph2genesis.m) file. This will re-generate "braph2mc" folder which can be used as explained above. **WARNING**: be aware that this process will erase all files inside "braph2mc" folder and re-generate them again.
 
