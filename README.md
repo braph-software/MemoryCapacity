@@ -53,15 +53,30 @@ This step can be performed using the following code:
 <code>analysis_MC = AnalyzeEnsemble_CON_WU( ...
     'GR', gr1 ...
     );
-
 % measure calculation at group level
 global_memorycapacity = analysis_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
 nodal_memorycapacity = analysis_MC.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
 </code>
+In this code, gr1 refers to the group of subjects created in Step 2. The code creates a weighted unidrected (WU) analysis that will calculate both nodel and global memory capacity measures for each subject and report the average values per group (stored in the variables global_memorycapacity and nodal_memorycapacity, respectively. 
 
-9.
-10.
-11.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
+8. Step 4 (optional): Get memory capacity values for individual subjects.
+This step can be performed using the following:
+
+<code>num_subject = gr1.get('SUB_DICT').get('LENGTH');
+global_memorycapacity_subject = cell(1, num_subject);
+nodal_memorycapacity_subject  = cell(1, num_subject);
+for i = 1:1:num_subject
+    global_memorycapacity_subject{i} = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'GlobalMemoryCapacity').get('M');
+    nodal_memorycapacity_subject{i}  = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'NodalMemoryCapacity').get('M');
+end
+</code>
+The individual values are stored in global_memorycapacity_subject and nodal_memorycapacity_subject cell arrays, where each cell holds the data for individual subjects.
+
+9. An example data that will allow the user to perform these steps can be created by running the script [create_data_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/gv/memorycapacity/create_data_memorycapacity.m). This script will create two groups of subjects and the associated atlas files. Each subject has a weighted random connectivity matrix with a mean nodal degree of 4, which has been derived using the Watts–Strogatz model (group 1 uses a rewiring probability of 0.3 and group 2 has a rewiring probability of 0.85). After running the code, the data will be created in braph2memorycapacity/pipelines/memorycapacity/Example Data memory capacity.
+10. The code [example_memorycapacity.m](https://github.com/braph-software/MemoryCapacity/blob/gv/memorycapacity/example_memorycapacity.m) shows an example of the usage of the memory capacity pipeline on this example data.
+11.
+12.
+13.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
 
 ### BRAPH 2.0 tutorials
 
