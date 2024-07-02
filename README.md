@@ -79,7 +79,7 @@ The Memory capacity pipeline can also be used via the graphical interfaces integ
 1. <b>Open</b> the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity) folder. 
 2.	<b>Execute</b> the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB. This script loads BRAPH 2.0 and all related dependencies. 
 3.	On the main GUI, <b>select</b> the "Pipeline Memory Capacity Analysis WU" and <b>open</b> this pipeline by pressing the button <button>"Open Pipeline Memory Capacity Analysis WU ..."</button>.
-4.		<b>This action opens an interface</b> with different sections that will guide the user through the different steps of the analyses (defining and ploting brain atlas, uploading a group, defining an analysis, and calculating the measures).
+4.	<b>This action opens an interface</b> with different sections that will guide the user through the different steps of the analyses (defining and ploting brain atlas, uploading a group, defining an analysis, and calculating the measures).
 
 #### BRAPH 2.0 tutorials
 
