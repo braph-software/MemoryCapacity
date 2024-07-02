@@ -33,10 +33,22 @@ ba = im_ba.get('BA');
 </code>
 
 For more information about brain atlases, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba), as well as the folder [atlases](https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases) where you can find several already prepared atlases ready to use with BRAPH 2.0.
-6.  
-7.
+
+6.  Step 2: Load group of subjects
+Subjects can be loaded using the following:
+
+<code>im_gr1 = ImporterGroupSubjectCON_XLS( ...
+    'DIRECTORY', [memory_example_path filesep 'MC_Group_1_XLS'], ...
+    'BA', ba, ...
+    'WAITBAR', true ...
+    );
+
+gr1 = im_gr1.get('GR');
+</code>
+
 8.
-9.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
+9.
+10.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
 
 ### BRAPH 2.0 tutorials
 
