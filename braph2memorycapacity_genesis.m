@@ -7,7 +7,27 @@ close all
 clear all %#ok<CLALL>
 clc
 
-%%% ADD CODE TO DOWLOAD braph2genesis
+%%% DOWLOAD braph2genesis
+repo = 'https://github.com/braph-software/BRAPH-2/archive/refs/heads/develop.zip';
+zipfile = 'BRAPH-2-develop.zip';
+websave(zipfile, repo);
+
+% create directory for braph2genesis
+folder_tmp = 'tmp_unzip';
+folder_genesis = 'braph2genesis';
+mkdir(folder_tmp);
+mkdir(folder_genesis)
+
+% unzip braph
+unzip(zipfile, folder_tmp)
+
+% copy braph2genesis from unzipped folder
+copyfile([fileparts(which('braph2memorycapacity_genesis')) filesep 'tmp_unzip' filesep 'BRAPH-2-develop' filesep 'braph2genesis'], ...
+    [fileparts(which('braph2memorycapacity_genesis')) filesep 'braph2genesis'])
+
+% remove not needed directory and file
+rmdir(folder_tmp, 's')
+delete(zipfile)
 
 addpath(['.' filesep() 'braph2genesis'])
 addpath(['.' filesep() 'braph2genesis' filesep() 'genesis'])

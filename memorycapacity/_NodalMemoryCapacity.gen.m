@@ -2,10 +2,10 @@
 NodalMemoryCapacity < Measure (m, nodal memory capacity) is the graph NodalMemoryCapacity.
 
 %%% ¡description!
-The nodal memory capacity measures how well a network manages to encode a random input signal in its reservoir.
-This nodal memory capacity is determined by training the network output to reproduce delayed input time series 
-and comparing the delayed input with the reservoir output across all reservoir nodes. 
-A high memory capacity indicates that the network has high capacity to remember and process the temporal 
+The nodal memory capacity measures how well a given node manages to encode a random input signal applied to itself.
+This nodal memory capacity is determined by training the nodal output to reproduce delayed input time series 
+and comparing the delayed input applied to the given node with its output. 
+A high memory capacity indicates that the node has high capacity to remember and process the temporal 
 information contained in the input signal. 
 
 %% ¡layout!
@@ -85,7 +85,7 @@ NAME (constant, string) is the name of the NodalMemoryCapacity.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the NodalMemoryCapacity.
 %%%% ¡default!
-'nodal memory capacity is calculated using reservoir computing, which is is a recurrent neural-network model. More details about the calculation can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).'
+'Nodal memory capacity is calculated using reservoir computing, which is is a recurrent neural-network model. More details about the calculation can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the NodalMemoryCapacity.
@@ -136,6 +136,7 @@ if isempty(mc_all_trials)
 else
     summed_mc_all_trials = cellfun(@(mc_all_delays) sum(mc_all_delays, 1), mc_all_trials, 'UniformOutput', false);
     m_value = {mean(cell2mat(summed_mc_all_trials'))};
+    m_value = m_value';
 end
 value = m_value;
 
@@ -198,7 +199,7 @@ end
 value = mc_all_trials;
 
 %%% ¡prop!
-MC_CALC (query, cell) calculates memory capacity at specific settings of specified delay, ridge, and wieghted matrices.
+MC_CALC (query, cell) calculates nodal memory capacity, given weighted connectivity matrix, input signal and maximum delay.
 %%%% ¡calculate!
 if isempty(varargin)
     value = {};

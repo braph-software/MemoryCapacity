@@ -2,7 +2,7 @@
 GlobalMemoryCapacity < Measure (m, global memory capacity) is the graph GlobalMemoryCapacity.
 
 %%% ¡description!
-The global memory capacity measures how well a network manages to encode a random input signal in its reservoir.
+The global memory capacity measures how well a network manages to encode a random input signal in its reservoir (Jaeger, 2001).
 This global memory capacity is determined by training the network output to reproduce delayed input time series 
 and comparing the delayed input with the reservoir output across all reservoir nodes. 
 A high memory capacity indicates that the network has high capacity to remember and process the temporal 
@@ -198,7 +198,7 @@ end
 value = mc_all_trials;
 
 %%% ¡prop!
-MC_CALC (query, cell) calculates memory capacity at specific settings of specified delay, ridge, and wieghted matrices.
+MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.
 %%%% ¡calculate!
 if isempty(varargin)
     value = {};

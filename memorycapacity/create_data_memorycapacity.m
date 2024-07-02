@@ -40,7 +40,7 @@ if ~isfolder(data_dir)
     % Group 1
     K1 = 2; % degree (mean node degree is 2K) - group 1
     beta1 = 0.3; % Rewiring probability - group 1
-    gr1_name = 'CON_Group_1_XLS';
+    gr1_name = 'MC_Group_1_XLS';
     gr1_dir = [data_dir filesep() gr1_name];
     mkdir(gr1_dir);
     vois1 = [
@@ -48,9 +48,10 @@ if ~isfolder(data_dir)
         {{} {} cell2str(sex_options)}
         ];
     for i = 1:1:50 % subject number
-        sub_id = ['SubjectCON_' num2str(i)];
+        sub_id = ['SubjectMC_' num2str(i)];
 
         h1 = WattsStrogatz(N, K1, beta1); % create two WS graph
+        
         % figure(1) % Plot the two graphs to double-check
         % plot(h1, 'NodeColor',[1 0 0], 'EdgeColor',[0 0 0], 'EdgeAlpha',0.1, 'Layout','circle');
         % title(['Group 1: Graph with $N = $ ' num2str(N_nodes) ...
@@ -72,7 +73,7 @@ if ~isfolder(data_dir)
     % Group 2
     K2 = 2; % degree (mean node degree is 2K) - group 2
     beta2 = 0.85; % Rewiring probability - group 2
-    gr2_name = 'CON_Group_2_XLS';
+    gr2_name = 'MC_Group_2_XLS';
     gr2_dir = [data_dir filesep() gr2_name];
     mkdir(gr2_dir);
     vois2 = [
@@ -80,9 +81,10 @@ if ~isfolder(data_dir)
         {{} {} cell2str(sex_options)}
         ];
     for i = 51:1:100
-        sub_id = ['SubjectCON_' num2str(i)];
+        sub_id = ['SubjectMC_' num2str(i)];
 
         h2 = WattsStrogatz(N, K2, beta2);
+        
         % figure(2)
         % plot(h2, 'NodeColor',[1 0 0], 'EdgeColor',[0 0 0], 'EdgeAlpha',0.1, 'Layout','circle');
         % title(['Group 2: Graph with $N = $ ' num2str(N_nodes) ...
