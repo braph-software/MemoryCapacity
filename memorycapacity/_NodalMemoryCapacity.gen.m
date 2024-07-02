@@ -281,7 +281,7 @@ GraphWU
 .01
 %%%% ¡code!
 B = rand(10);  % create random matrix 0-1
-B(1:length(B)+1:numel(B)) = 0;  % remove diagonal
+B(1:length(B) + 1:numel(B)) = 0;  % remove diagonal
 g = GraphWU('B', B);
 mc_nodal = g.get('MEASURE', 'NodalMemoryCapacity');  % calculate nodal memory capacity
 result = mc_nodal.get('M');

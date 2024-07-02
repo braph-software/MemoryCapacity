@@ -7,7 +7,7 @@ close all
 clear all %#ok<CLALL>
 clc
 
-%%% DOWLOAD braph2genesis
+%% Download braph2genesis
 repo = 'https://github.com/braph-software/BRAPH-2/archive/refs/heads/develop.zip';
 zipfile = 'BRAPH-2-develop.zip';
 websave(zipfile, repo);
