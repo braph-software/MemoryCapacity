@@ -12,16 +12,29 @@ The **BRAPH 2.0 Memory Capacity** is a pipeline that uses the reservoir computin
 
 ## Code implementation
 The codes implementing the global and regional memory capacity are located in the [braph2mc/pipelines/MemoryCapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity) folder. 
-Both measures have been implemented within a single pipeline that is fully integrated in BRAPH 2.0 and can be used both from MATLAB command line or through the Graphical User Interfaces. 
-
-## Repository description
-1. braph2memorycapacity_genesis.m: A script that executes compilation codes implementing the global and regional memory capacity are located in the [braph2mc/pipelines/MemoryCapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc/pipelines/MemoryCapacity) folder.
+Both measures have been implemented within a single pipeline that is fully integrated in BRAPH 2.0 software.
 
 ### Usage of the “MemoryCapacity” Pipeline
-The braph2mc folder contains a fully compiled version of BRAPH 2.0 with only this pipeline. To use the pipeline, follow these steps:
-1.	Open the [braph2mc](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2mc) folder.
-3.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB.
-4.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
+The braph2memorycapacity folder contains a fully compiled, mimimal version of BRAPH 2.0 that calculates the memory capacity. This version of BRAPH 2.0 contains only one pipeline, that allows the user to upload brain atlas, to upload subjects with connectivity matrices, and to calculate the memory capacity for each subject. This pipeline can be used both from  MATLAB command line or through the Graphical User Interfaces. To use the pipeline, follow these steps:
+
+## Usage through MATLAB command line (suggested use)
+1.	Open the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity) folder. 
+2.	Execute the [braph2mc.m](https://github.com/braph-software/MemoryCapacity/blob/develop/braph2mc/braph2mc.m) script in MATLAB. This script loads BRAPH 2.0 and all related dependencies. 
+3.  BRAPH 2.0 software is now fully loaded and ready to use. The calculation of memory capacity can be performed in 3 steps:
+4.  Step 1: Load brain atlas.
+   Braph atlas can be loaded by executing the following code:
+"<ins>  im_ba = ImporterBrainAtlasXLS( ...
+    'FILE', [memory_example_path filesep 'atlas.xlsx'], ...
+    'WAITBAR', true ...
+    );
+
+ba = im_ba.get('BA'); </ins> "
+
+    
+6.  
+7.
+8.
+9.	Click on the link that the MATLAB terminal will print saying "<ins>Open Memory Capacity Analysis</ins> "
 
 ### BRAPH 2.0 tutorials
 
