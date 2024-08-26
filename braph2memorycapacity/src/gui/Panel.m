@@ -139,6 +139,8 @@ classdef Panel < ConcreteElement
 	%
 	%
 	% See also uipanel, PanelElement, PanelProp, PanelFig, GUI, GUIElement, GUIFig.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -234,6 +236,21 @@ classdef Panel < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel.
+			%
+			% BUILD = Panel.GETBUILD() returns the build of 'Panel'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PN.GETBUILD() returns the build of the panel PN.
+			%  BUILD = Element.GETBUILD(PN) returns the build of 'PN'.
+			%  BUILD = Element.GETBUILD('Panel') returns the build of 'Panel'.
+			%
+			% Note that the Element.GETBUILD(PN) and Element.GETBUILD('Panel')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pn_class = getClass()
 			%GETCLASS returns the class of the panel.
 			%

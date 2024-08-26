@@ -8,6 +8,9 @@ and comparing the delayed input with the reservoir output across all reservoir n
 A high memory capacity indicates that the network has high capacity to remember and process the temporal 
 information contained in the input signal. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

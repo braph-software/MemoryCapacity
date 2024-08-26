@@ -114,6 +114,8 @@ classdef ExporterGroupSubjectCON_TXT < Exporter
 	%
 	%
 	% See also Group, SunbjectCON, ImporterGroupSubjectCON_TXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		GR = 10; %CET: Computational Efficiency Trick
@@ -168,6 +170,21 @@ classdef ExporterGroupSubjectCON_TXT < Exporter
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the exporter of CON subject group in TXT.
+			%
+			% BUILD = ExporterGroupSubjectCON_TXT.GETBUILD() returns the build of 'ExporterGroupSubjectCON_TXT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EX.GETBUILD() returns the build of the exporter of CON subject group in TXT EX.
+			%  BUILD = Element.GETBUILD(EX) returns the build of 'EX'.
+			%  BUILD = Element.GETBUILD('ExporterGroupSubjectCON_TXT') returns the build of 'ExporterGroupSubjectCON_TXT'.
+			%
+			% Note that the Element.GETBUILD(EX) and Element.GETBUILD('ExporterGroupSubjectCON_TXT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ex_class = getClass()
 			%GETCLASS returns the class of the exporter of CON subject group in TXT.
 			%

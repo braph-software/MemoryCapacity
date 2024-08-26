@@ -107,6 +107,8 @@ classdef AnalyzeEnsemble_CON_WU < AnalyzeEnsemble
 	%
 	%
 	% See also SubjectCON, GraphWU.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	methods % constructor
 		function a = AnalyzeEnsemble_CON_WU(varargin)
@@ -141,6 +143,21 @@ classdef AnalyzeEnsemble_CON_WU < AnalyzeEnsemble
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph analysis with connectivity data.
+			%
+			% BUILD = AnalyzeEnsemble_CON_WU.GETBUILD() returns the build of 'AnalyzeEnsemble_CON_WU'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the graph analysis with connectivity data A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeEnsemble_CON_WU') returns the build of 'AnalyzeEnsemble_CON_WU'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeEnsemble_CON_WU')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the graph analysis with connectivity data.
 			%
