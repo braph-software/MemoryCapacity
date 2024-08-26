@@ -233,6 +233,21 @@ classdef GraphWU < Graph
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the weighted undirected graph.
+			%
+			% BUILD = GraphWU.GETBUILD() returns the build of 'GraphWU'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = G.GETBUILD() returns the build of the weighted undirected graph G.
+			%  BUILD = Element.GETBUILD(G) returns the build of 'G'.
+			%  BUILD = Element.GETBUILD('GraphWU') returns the build of 'GraphWU'.
+			%
+			% Note that the Element.GETBUILD(G) and Element.GETBUILD('GraphWU')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function g_class = getClass()
 			%GETCLASS returns the class of the weighted undirected graph.
 			%

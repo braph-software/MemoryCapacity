@@ -168,6 +168,8 @@ classdef PanelProp < Panel
 	%
 	%
 	% See also uipanel, uilabel, uibutton, GUI, GUIElement, PanelElement.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		X_DRAW = 20; %CET: Computational Efficiency Trick
@@ -304,6 +306,21 @@ classdef PanelProp < Panel
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the prop panel.
+			%
+			% BUILD = PanelProp.GETBUILD() returns the build of 'PanelProp'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PR.GETBUILD() returns the build of the prop panel PR.
+			%  BUILD = Element.GETBUILD(PR) returns the build of 'PR'.
+			%  BUILD = Element.GETBUILD('PanelProp') returns the build of 'PanelProp'.
+			%
+			% Note that the Element.GETBUILD(PR) and Element.GETBUILD('PanelProp')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pr_class = getClass()
 			%GETCLASS returns the class of the prop panel.
 			%

@@ -132,6 +132,8 @@ classdef BrainSurfacePF < PanelFig
 	%
 	%
 	% See also BrainSurface.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % constants
 		% fixed 3d view
@@ -291,6 +293,21 @@ classdef BrainSurfacePF < PanelFig
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel figure for brain surface.
+			%
+			% BUILD = BrainSurfacePF.GETBUILD() returns the build of 'BrainSurfacePF'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PF.GETBUILD() returns the build of the panel figure for brain surface PF.
+			%  BUILD = Element.GETBUILD(PF) returns the build of 'PF'.
+			%  BUILD = Element.GETBUILD('BrainSurfacePF') returns the build of 'BrainSurfacePF'.
+			%
+			% Note that the Element.GETBUILD(PF) and Element.GETBUILD('BrainSurfacePF')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pf_class = getClass()
 			%GETCLASS returns the class of the panel figure for brain surface.
 			%

@@ -8,6 +8,9 @@ and comparing the delayed input applied to the given node with its output.
 A high memory capacity indicates that the node has high capacity to remember and process the temporal 
 information contained in the input signal. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

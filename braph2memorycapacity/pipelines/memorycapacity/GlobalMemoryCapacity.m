@@ -181,6 +181,21 @@ classdef GlobalMemoryCapacity < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the global memory capacity.
+			%
+			% BUILD = GlobalMemoryCapacity.GETBUILD() returns the build of 'GlobalMemoryCapacity'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the global memory capacity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('GlobalMemoryCapacity') returns the build of 'GlobalMemoryCapacity'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('GlobalMemoryCapacity')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the global memory capacity.
 			%

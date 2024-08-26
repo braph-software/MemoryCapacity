@@ -141,6 +141,8 @@ classdef BrainAtlasPF < BrainSurfacePF
 	%
 	%
 	% See also BrainAtlas, BrainSurface.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BA = 33; %CET: Computational Efficiency Trick
@@ -272,6 +274,21 @@ classdef BrainAtlasPF < BrainSurfacePF
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel figure for brain atlas.
+			%
+			% BUILD = BrainAtlasPF.GETBUILD() returns the build of 'BrainAtlasPF'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PF.GETBUILD() returns the build of the panel figure for brain atlas PF.
+			%  BUILD = Element.GETBUILD(PF) returns the build of 'PF'.
+			%  BUILD = Element.GETBUILD('BrainAtlasPF') returns the build of 'BrainAtlasPF'.
+			%
+			% Note that the Element.GETBUILD(PF) and Element.GETBUILD('BrainAtlasPF')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pf_class = getClass()
 			%GETCLASS returns the class of the panel figure for brain atlas.
 			%

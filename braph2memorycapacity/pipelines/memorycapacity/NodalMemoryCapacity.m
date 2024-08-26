@@ -181,6 +181,21 @@ classdef NodalMemoryCapacity < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the nodal memory capacity.
+			%
+			% BUILD = NodalMemoryCapacity.GETBUILD() returns the build of 'NodalMemoryCapacity'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the nodal memory capacity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('NodalMemoryCapacity') returns the build of 'NodalMemoryCapacity'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('NodalMemoryCapacity')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the nodal memory capacity.
 			%

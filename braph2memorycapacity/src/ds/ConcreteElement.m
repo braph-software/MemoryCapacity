@@ -107,6 +107,8 @@ classdef ConcreteElement < Element
 	%
 	%
 	% See also NoValue, Callback.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		ELCLASS = 1; %CET: Computational Efficiency Trick
@@ -176,6 +178,21 @@ classdef ConcreteElement < Element
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the concrete element.
+			%
+			% BUILD = ConcreteElement.GETBUILD() returns the build of 'ConcreteElement'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EL.GETBUILD() returns the build of the concrete element EL.
+			%  BUILD = Element.GETBUILD(EL) returns the build of 'EL'.
+			%  BUILD = Element.GETBUILD('ConcreteElement') returns the build of 'ConcreteElement'.
+			%
+			% Note that the Element.GETBUILD(EL) and Element.GETBUILD('ConcreteElement')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function el_class = getClass()
 			%GETCLASS returns the class of the concrete element.
 			%
