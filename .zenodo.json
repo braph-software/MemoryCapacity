@@ -1,63 +1,36 @@
 {
     "creators": [
         {
-            "orcid": "0000-0001-5057-1846",
-            "affiliation": "Gothenburg University",
-            "name": "Volpe, Giovanni"
+            "affiliation": "Karolinska Institutet",
+            "name": "Mijalkov, Mite"
         },
         {
-            "orcid": "0000-0002-4604-2711",
-            "affiliation": "Karolinksa Institute",
-            "name": "Pereira, Joana"
-        }, 
-        {
-            "orcid": "0000-0002-5388-7712",
-            "affiliation": "Gothenburg University",
-            "name": "Gómez-Ruiz, Emiliano"
-        }, 
-        {
-            "orcid": "0000-0001-9598-2278",
-            "affiliation": "Gothenburg University",
+            "affiliation": "Goteborg University",
             "name": "Chang, Yu-Wei"
         }, 
         {
-            "orcid": "0000-0001-7460-741X",
-            "affiliation": "Karolinksa Institute",
-            "name": "Canal-Garcia, Anna"
+            "affiliation": "Karolinska Institutet",
+            "name": "Zufiria-Gerboles, Blanca"
         }, 
         {
-            "orcid": "0000-0002-9844-4413",
-            "affiliation": "Karolinksa Institute",
-            "name": "Mijalkov, Mite"
+            "affiliation": "Goteborg University",
+            "name": "Gomez-Ruiz, Emiliano"
         }, 
         {
-            "orcid": "0000-0003-2077-5252",
-            "affiliation": "Karolinksa Institute",
-            "name": "Véreb, Dániel"
-        },
-        {
-            "orcid": "0000-0002-3115-2977",
-            "affiliation": "Karolinksa Institute",
-            "name": "Westman, Eric"
-        },
-        {
-            "orcid": "0009-0009-3797-1162",
-            "affiliation": "Gothenburg University",
+            "affiliation": "Goteborg University",
             "name": "Zhao, Hang"
-        },
+        }, 
         {
-            "orcid": "0000-0001-7756-630X",
-            "affiliation": "Karolinksa Institute",
-            "name": "Zufiria Gerbolés, Blanca"
-        },
+            "affiliation": "Karolinska Institutet",
+            "name": "Pereira, Joana B"
+        }, 
         {
-            "orcid": "0000-0002-2986-2734",
-            "affiliation": "Karolinksa Institute",
-            "name": "Sun, Jiawei"
+            "affiliation": "Goteborg University",
+            "name": "Volpe, Giovanni"
         }
     ],
 
-    "title": "BRAPH 2: Brain Analysis Using Graph Theory 2",
+    "title": "BRAPH 2.0 Memory Capacity",
 
     "related_identifiers": [
         {
@@ -68,14 +41,14 @@
         }
     ],
     
-    "description": "An object-oriented software that provides pipelines for conventional brain connectivity analysis as well as more advanced methods, including multilayer networks and deep learning methods." ,
+    "description": "The BRAPH 2.0 Memory Capacity is a pipeline that uses the reservoir computing framework to calculate both global and regional memory capacity." ,
 
-    "keywords": ["Brain", "Software", "Graph", "Multigraph", "Multiplex Graph", "MATLAB", "Neuroimaging", "Deep Learning"],
+    "keywords": ["Reservoir computing", "Software", "Neuroimaging", "Deep Learning", "Brain connectivity", "Aging"],
 
     "upload_type": "software",
 
     "communities": [
         {"identifier": "www.braph.org"},
-        {"identifier": "https://github.com/softmatterlab/BRAPH-2-Matlab"}
+        {"identifier": "https://github.com/braph-software/MemoryCapacity"}
     ]
 }
