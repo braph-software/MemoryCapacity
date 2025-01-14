@@ -8,7 +8,7 @@
 *.out
 *.toc
 
-braph2/pipelines/*/Example *
+braph2memorycapacity/pipelines/*/Example *
 
 *_with_exclusions/
 
