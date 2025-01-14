@@ -3,7 +3,7 @@
 % This is the pipeline script to calculate the global and nodal memory capacity of a group of subjects using connectivity data and a weighted undirected graph.
 % The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI).
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
-% 2. It loads the data of one group of subjects from two directories (e.g., CON_Group_1 and CON_Group_2) containing XLS files of each subject.
+% 2. It loads the data of one group of subjects from two directories (e.g., MC_Group_1_XLS or MC_Group_1_XLS) containing XLS files of each subject.
 % 3. It analyzes these data using a connectivity analysis (CON) based on a weighted undirected graph (WU).
 
 % PDF: 
@@ -15,9 +15,5 @@ ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Br
 %% Group
 gr = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON from XLS % Group CON
 
-%% Analysis
-a_WU = AnalyzeEnsemble_CON_WU('GR', gr); % Analyze Group % Group Analysis
-
-%% Memory Capacity (MC)
-gmc = a_WU.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M'); % Calculate Global MC % Global MC
-nmc = a_WU.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M'); % Calculate Nodal MC % Nodal MC
+%% Analysis (Memory Capacity)
+a_WU = AnalyzeEnsemble_CON_WU('GR', gr); % Analyze Group % Group Memory Capacity

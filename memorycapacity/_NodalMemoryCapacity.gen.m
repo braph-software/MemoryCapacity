@@ -353,11 +353,3 @@ assert(mean(cell2mat(nodal_memorycapacity1)) > mean(cell2mat(nodal_memorycapacit
     [BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
     'NodalMemoryCapacity does not calculate memory capacity correctly.' ...
     )
-
-%%% ¡test!
-%%%% ¡name!
-Example script
-%%%% ¡probability!
-.01
-%%%% ¡code!
-example_memorycapacity()

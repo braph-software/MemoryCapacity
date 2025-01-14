@@ -346,11 +346,3 @@ assert(mean(cell2mat(global_memorycapacity1)) > mean(cell2mat(global_memorycapac
     [BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
     'GlobalMemoryCapacity does not calculate memory capacity correctly.' ...
     )
-
-%%% ¡test!
-%%%% ¡name!
-Example script
-%%%% ¡probability!
-.01
-%%%% ¡code!
-example_memorycapacity()
