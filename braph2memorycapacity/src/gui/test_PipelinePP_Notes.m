@@ -505,7 +505,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:PipelinePP_Notes.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU])
+		if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU PipelinePP_Notes.MENUS])
 			continue
 		end
 	 
@@ -649,7 +649,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:PipelinePP_Notes.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU])
+		if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU PipelinePP_Notes.MENUS])
 			continue
 		end
 	 
@@ -752,7 +752,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		for prop = 1:1:PipelinePP_Notes.getPropNumber()
 	 
 			% excluded props
-			if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU])
+			if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU PipelinePP_Notes.MENUS])
 				continue
 			end
 	 
@@ -1538,7 +1538,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:PipelinePP_Notes.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU])
+		if any(prop == [PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU PipelinePP_Notes.MENUS])
 			continue
 		end
 	 
@@ -1721,7 +1721,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	warning('off', [BRAPH2.STR ':PipelinePP_Notes'])
 	
 	warning('off', [BRAPH2.STR ':PipelinePP_Notes'])
-	assert(length(findall(0, 'type', 'figure')) == 1)
+	assert(length(findall(0, 'type', 'figure')) == 2)
 	delete(findall(0, 'type', 'figure'))
 	warning('on', [BRAPH2.STR ':PipelinePP_Notes'])
 	
