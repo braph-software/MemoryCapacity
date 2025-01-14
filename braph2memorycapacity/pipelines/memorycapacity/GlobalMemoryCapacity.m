@@ -24,11 +24,12 @@ classdef GlobalMemoryCapacity < Measure
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the average global memory capacity across all trials.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
-	%  <strong>17</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).
-	%  <strong>18</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the maximum delay to be considered.
-	%  <strong>19</strong> <strong>MC_ALL_TRIALS</strong> 	MC_ALL_TRIALS (result, cell) is the global memory capacity at all trials.
-	%  <strong>20</strong> <strong>MC_CALC</strong> 	MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.
+	%  <strong>16</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) determines whether to show the waitbar.
+	%  <strong>17</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
+	%  <strong>18</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).
+	%  <strong>19</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the maximum delay to be considered.
+	%  <strong>20</strong> <strong>MC_ALL_TRIALS</strong> 	MC_ALL_TRIALS (result, cell) is the global memory capacity at all trials.
+	%  <strong>21</strong> <strong>MC_CALC</strong> 	MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.
 	%
 	% GlobalMemoryCapacity methods (constructor):
 	%  GlobalMemoryCapacity - constructor
@@ -117,27 +118,32 @@ classdef GlobalMemoryCapacity < Measure
 	%
 	
 	properties (Constant) % properties
-		TRIALS = 16; %CET: Computational Efficiency Trick
+		WAITBAR = 16; %CET: Computational Efficiency Trick
+		WAITBAR_TAG = 'WAITBAR';
+		WAITBAR_CATEGORY = 9;
+		WAITBAR_FORMAT = 4;
+		
+		TRIALS = 17; %CET: Computational Efficiency Trick
 		TRIALS_TAG = 'TRIALS';
 		TRIALS_CATEGORY = 3;
 		TRIALS_FORMAT = 11;
 		
-		TRAINING_SAMPLES = 17; %CET: Computational Efficiency Trick
+		TRAINING_SAMPLES = 18; %CET: Computational Efficiency Trick
 		TRAINING_SAMPLES_TAG = 'TRAINING_SAMPLES';
 		TRAINING_SAMPLES_CATEGORY = 3;
 		TRAINING_SAMPLES_FORMAT = 11;
 		
-		TAU_MAX = 18; %CET: Computational Efficiency Trick
+		TAU_MAX = 19; %CET: Computational Efficiency Trick
 		TAU_MAX_TAG = 'TAU_MAX';
 		TAU_MAX_CATEGORY = 3;
 		TAU_MAX_FORMAT = 11;
 		
-		MC_ALL_TRIALS = 19; %CET: Computational Efficiency Trick
+		MC_ALL_TRIALS = 20; %CET: Computational Efficiency Trick
 		MC_ALL_TRIALS_TAG = 'MC_ALL_TRIALS';
 		MC_ALL_TRIALS_CATEGORY = 5;
 		MC_ALL_TRIALS_FORMAT = 16;
 		
-		MC_CALC = 20; %CET: Computational Efficiency Trick
+		MC_CALC = 21; %CET: Computational Efficiency Trick
 		MC_CALC_TAG = 'MC_CALC';
 		MC_CALC_CATEGORY = 6;
 		MC_CALC_FORMAT = 16;
@@ -169,11 +175,12 @@ classdef GlobalMemoryCapacity < Measure
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the average global memory capacity across all trials.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
-			%  <strong>17</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).
-			%  <strong>18</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the maximum delay to be considered.
-			%  <strong>19</strong> <strong>MC_ALL_TRIALS</strong> 	MC_ALL_TRIALS (result, cell) is the global memory capacity at all trials.
-			%  <strong>20</strong> <strong>MC_CALC</strong> 	MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.
+			%  <strong>16</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) determines whether to show the waitbar.
+			%  <strong>17</strong> <strong>TRIALS</strong> 	TRIALS (parameter, scalar) is the number of trials.
+			%  <strong>18</strong> <strong>TRAINING_SAMPLES</strong> 	TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).
+			%  <strong>19</strong> <strong>TAU_MAX</strong> 	TAU_MAX (parameter, scalar) is the maximum delay to be considered.
+			%  <strong>20</strong> <strong>MC_ALL_TRIALS</strong> 	MC_ALL_TRIALS (result, cell) is the global memory capacity at all trials.
+			%  <strong>21</strong> <strong>MC_CALC</strong> 	MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.
 			%
 			% See also Category, Format.
 			
@@ -250,7 +257,7 @@ classdef GlobalMemoryCapacity < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21];
 				return
 			end
 			
@@ -260,15 +267,15 @@ classdef GlobalMemoryCapacity < Measure
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 16 17 18];
+					prop_list = [4 17 18 19];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
-					prop_list = [14 19];
+					prop_list = [14 20];
 				case 6 % Category.QUERY
-					prop_list = [8 20];
+					prop_list = [8 21];
 				case 9 % Category.GUI
-					prop_list = 15;
+					prop_list = [15 16];
 				otherwise
 					prop_list = [];
 			end
@@ -294,7 +301,7 @@ classdef GlobalMemoryCapacity < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 20;
+				prop_number = 21;
 				return
 			end
 			
@@ -312,7 +319,7 @@ classdef GlobalMemoryCapacity < Measure
 				case 6 % Category.QUERY
 					prop_number = 2;
 				case 9 % Category.GUI
-					prop_number = 1;
+					prop_number = 2;
 				otherwise
 					prop_number = 0;
 			end
@@ -343,7 +350,7 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 20 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 21 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -381,7 +388,7 @@ classdef GlobalMemoryCapacity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'MC_ALL_TRIALS'  'MC_CALC' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'WAITBAR'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'MC_ALL_TRIALS'  'MC_CALC' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -414,7 +421,7 @@ classdef GlobalMemoryCapacity < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'MC_ALL_TRIALS'  'MC_CALC' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'WAITBAR'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'MC_ALL_TRIALS'  'MC_CALC' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -443,7 +450,7 @@ classdef GlobalMemoryCapacity < Measure
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				globalmemorycapacity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'MC_ALL_TRIALS'  'MC_CALC' };
+				globalmemorycapacity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'WAITBAR'  'TRIALS'  'TRAINING_SAMPLES'  'TAU_MAX'  'MC_ALL_TRIALS'  'MC_CALC' };
 				tag = globalmemorycapacity_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -470,7 +477,7 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalmemorycapacity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3  3  3  5  6 };
+			globalmemorycapacity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3  3  3  5  6 };
 			prop_category = globalmemorycapacity_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -496,7 +503,7 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalmemorycapacity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  11  11  11  16  16 };
+			globalmemorycapacity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  4  11  11  11  16  16 };
 			prop_format = globalmemorycapacity_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -522,7 +529,7 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalmemorycapacity_description_list = { 'ELCLASS (constant, string) is the class of the GlobalMemoryCapacity.'  'NAME (constant, string) is the name of the GlobalMemoryCapacity.'  'DESCRIPTION (constant, string) is the description of the GlobalMemoryCapacity.'  'TEMPLATE (parameter, item) is the template of the GlobalMemoryCapacity.'  'ID (data, string) is a few-letter code of the GlobalMemoryCapacity.'  'LABEL (metadata, string) is an extended label of the GlobalMemoryCapacity.'  'NOTES (metadata, string) are some specific notes about the GlobalMemoryCapacity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the average global memory capacity across all trials.'  'PFM (gui, item) contains the panel figure of the measure.'  'TRIALS (parameter, scalar) is the number of trials.'  'TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).'  'TAU_MAX (parameter, scalar) is the maximum delay to be considered.'  'MC_ALL_TRIALS (result, cell) is the global memory capacity at all trials.'  'MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.' };
+			globalmemorycapacity_description_list = { 'ELCLASS (constant, string) is the class of the GlobalMemoryCapacity.'  'NAME (constant, string) is the name of the GlobalMemoryCapacity.'  'DESCRIPTION (constant, string) is the description of the GlobalMemoryCapacity.'  'TEMPLATE (parameter, item) is the template of the GlobalMemoryCapacity.'  'ID (data, string) is a few-letter code of the GlobalMemoryCapacity.'  'LABEL (metadata, string) is an extended label of the GlobalMemoryCapacity.'  'NOTES (metadata, string) are some specific notes about the GlobalMemoryCapacity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the average global memory capacity across all trials.'  'PFM (gui, item) contains the panel figure of the measure.'  'WAITBAR (gui, logical) determines whether to show the waitbar.'  'TRIALS (parameter, scalar) is the number of trials.'  'TRAINING_SAMPLES (parameter, scalar) is the number of training samples (length of input time series).'  'TAU_MAX (parameter, scalar) is the maximum delay to be considered.'  'MC_ALL_TRIALS (result, cell) is the global memory capacity at all trials.'  'MC_CALC (query, cell) calculates global memory capacity, given weighted connectivity matrix, input signal and maximum delay.' };
 			prop_description = globalmemorycapacity_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -548,15 +555,17 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 16 % GlobalMemoryCapacity.TRIALS
+				case 16 % GlobalMemoryCapacity.WAITBAR
+					prop_settings = Format.getFormatSettings(4);
+				case 17 % GlobalMemoryCapacity.TRIALS
 					prop_settings = Format.getFormatSettings(11);
-				case 17 % GlobalMemoryCapacity.TRAINING_SAMPLES
+				case 18 % GlobalMemoryCapacity.TRAINING_SAMPLES
 					prop_settings = Format.getFormatSettings(11);
-				case 18 % GlobalMemoryCapacity.TAU_MAX
+				case 19 % GlobalMemoryCapacity.TAU_MAX
 					prop_settings = Format.getFormatSettings(11);
-				case 19 % GlobalMemoryCapacity.MC_ALL_TRIALS
+				case 20 % GlobalMemoryCapacity.MC_ALL_TRIALS
 					prop_settings = Format.getFormatSettings(16);
-				case 20 % GlobalMemoryCapacity.MC_CALC
+				case 21 % GlobalMemoryCapacity.MC_CALC
 					prop_settings = Format.getFormatSettings(16);
 				case 4 % GlobalMemoryCapacity.TEMPLATE
 					prop_settings = 'GlobalMemoryCapacity';
@@ -587,15 +596,17 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 16 % GlobalMemoryCapacity.TRIALS
+				case 16 % GlobalMemoryCapacity.WAITBAR
+					prop_default = true;
+				case 17 % GlobalMemoryCapacity.TRIALS
 					prop_default = 10;
-				case 17 % GlobalMemoryCapacity.TRAINING_SAMPLES
+				case 18 % GlobalMemoryCapacity.TRAINING_SAMPLES
 					prop_default = 20000;
-				case 18 % GlobalMemoryCapacity.TAU_MAX
+				case 19 % GlobalMemoryCapacity.TAU_MAX
 					prop_default = 35;
-				case 19 % GlobalMemoryCapacity.MC_ALL_TRIALS
+				case 20 % GlobalMemoryCapacity.MC_ALL_TRIALS
 					prop_default = Format.getFormatDefault(16, GlobalMemoryCapacity.getPropSettings(prop));
-				case 20 % GlobalMemoryCapacity.MC_CALC
+				case 21 % GlobalMemoryCapacity.MC_CALC
 					prop_default = Format.getFormatDefault(16, GlobalMemoryCapacity.getPropSettings(prop));
 				case 1 % GlobalMemoryCapacity.ELCLASS
 					prop_default = 'GlobalMemoryCapacity';
@@ -683,15 +694,17 @@ classdef GlobalMemoryCapacity < Measure
 			prop = GlobalMemoryCapacity.getPropProp(pointer);
 			
 			switch prop
-				case 16 % GlobalMemoryCapacity.TRIALS
+				case 16 % GlobalMemoryCapacity.WAITBAR
+					check = Format.checkFormat(4, value, GlobalMemoryCapacity.getPropSettings(prop));
+				case 17 % GlobalMemoryCapacity.TRIALS
 					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 17 % GlobalMemoryCapacity.TRAINING_SAMPLES
+				case 18 % GlobalMemoryCapacity.TRAINING_SAMPLES
 					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 18 % GlobalMemoryCapacity.TAU_MAX
+				case 19 % GlobalMemoryCapacity.TAU_MAX
 					check = Format.checkFormat(11, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 19 % GlobalMemoryCapacity.MC_ALL_TRIALS
+				case 20 % GlobalMemoryCapacity.MC_ALL_TRIALS
 					check = Format.checkFormat(16, value, GlobalMemoryCapacity.getPropSettings(prop));
-				case 20 % GlobalMemoryCapacity.MC_CALC
+				case 21 % GlobalMemoryCapacity.MC_CALC
 					check = Format.checkFormat(16, value, GlobalMemoryCapacity.getPropSettings(prop));
 				case 4 % GlobalMemoryCapacity.TEMPLATE
 					check = Format.checkFormat(8, value, GlobalMemoryCapacity.getPropSettings(prop));
@@ -729,8 +742,8 @@ classdef GlobalMemoryCapacity < Measure
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 19 % GlobalMemoryCapacity.MC_ALL_TRIALS
-					rng_settings_ = rng(); rng(m.getPropSeed(19), 'twister')
+				case 20 % GlobalMemoryCapacity.MC_ALL_TRIALS
+					rng_settings_ = rng(); rng(m.getPropSeed(20), 'twister')
 					
 					trials = m.get('TRIALS');
 					T = m.get('TRAINING_SAMPLES');
@@ -741,6 +754,7 @@ classdef GlobalMemoryCapacity < Measure
 					if isequal(N, 0)
 					    mc_all_trials = {};
 					else
+					    wb = braph2waitbar(m.get('WAITBAR'), 0, ['Calculating Memory Capacity ...']);
 					    for i = 1:trials
 					        input_data = rand(1, T);  % input data
 					
@@ -766,14 +780,17 @@ classdef GlobalMemoryCapacity < Measure
 					        W = W / sr;
 					
 					        mc_all_trials{i} = m.get('MC_CALC', W, W_in, tau_max, input_data, 0, 0);
+					
+					        braph2waitbar(wb, .15 + .85 * min(i, trials) / trials, ['Memory Capacity Trial # ' num2str(min(i, trials)) ' of ' num2str(trials) ' ...'])
 					    end
+					    braph2waitbar(wb, 'close')
 					end
 					
 					value = mc_all_trials;
 					
 					rng(rng_settings_)
 					
-				case 20 % GlobalMemoryCapacity.MC_CALC
+				case 21 % GlobalMemoryCapacity.MC_CALC
 					if isempty(varargin)
 					    value = {};
 					    return
