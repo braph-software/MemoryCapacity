@@ -144,6 +144,11 @@ value = m_value;
 
 %% ¡props!
 %%% ¡prop!
+WAITBAR (gui, logical) determines whether to show the waitbar.
+%%%% ¡default!
+true
+
+%%% ¡prop!
 TRIALS (parameter, scalar) is the number of trials.
 %%%% ¡default!
 10
@@ -170,6 +175,7 @@ N = size(conn_matrix, 1);
 if isequal(N, 0)
     mc_all_trials = {};
 else
+    wb = braph2waitbar(m.get('WAITBAR'), 0, ['Calculating Memory Capacity ...']);
     for i = 1:trials
         input_data = rand(1, T);  % input data
 
@@ -195,7 +201,10 @@ else
         W = W / sr;
 
         mc_all_trials{i} = m.get('MC_CALC', W, W_in, tau_max, input_data, 0, 0);
+
+        braph2waitbar(wb, .15 + .85 * min(i, trials) / trials, ['Memory Capacity Trial # ' num2str(min(i, trials)) ' of ' num2str(trials) ' ...'])
     end
+    braph2waitbar(wb, 'close')
 end
 
 value = mc_all_trials;
@@ -272,6 +281,12 @@ value = MC_tau;
 
 %%% ¡test!
 %%%% ¡name!
+Create example files
+%%%% ¡code!
+create_data_memorycapacity() % only creates files if the example folder doesn't already exist
+
+%%% ¡test!
+%%%% ¡name!
 GraphWU
 %%%% ¡probability!
 .01
@@ -281,3 +296,61 @@ B(1:length(B) + 1:numel(B)) = 0;  % remove diagonal
 g = GraphWU('B', B);
 mc_global = g.get('MEASURE', 'GlobalMemoryCapacity');  % calculate global memory capacity
 result = mc_global.get('M');
+
+%%% ¡test!
+%%%% ¡name!
+Verification
+%%%% ¡probability!
+.01
+%%%% ¡code!
+% Load BrainAtlas
+memory_example_path = [fileparts(which('braph2')) filesep 'pipelines' filesep 'memorycapacity' filesep 'Example Data memory capacity'];
+im_ba = ImporterBrainAtlasXLS( ...
+    'FILE', [memory_example_path filesep 'atlas.xlsx'], ...
+    'WAITBAR', true ...
+    );
+
+ba = im_ba.get('BA');
+
+% Load Groups of SubjectCON
+im_gr1 = ImporterGroupSubjectCON_XLS( ...
+    'DIRECTORY', [memory_example_path filesep 'MC_Group_1_XLS'], ...
+    'BA', ba, ...
+    'WAITBAR', true ...
+    );
+
+gr1 = im_gr1.get('GR');
+
+im_gr2 = ImporterGroupSubjectCON_XLS( ...
+    'DIRECTORY', [memory_example_path filesep 'MC_Group_2_XLS'], ...
+    'BA', ba, ...
+    'WAITBAR', true ...
+    );
+
+gr2 = im_gr2.get('GR');
+
+% Analysis Global MC
+a1_MC = AnalyzeEnsemble_CON_WU( ...
+    'GR', gr1 ...
+    );
+
+a2_MC = AnalyzeEnsemble_CON_WU( ...
+    'GR', gr2 ...
+    );
+
+% measure calculation at group level
+global_memorycapacity1 = a1_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+global_memorycapacity2 = a2_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+
+assert(mean(cell2mat(global_memorycapacity1)) > mean(cell2mat(global_memorycapacity2)), ...
+    [BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
+    'GlobalMemoryCapacity does not calculate memory capacity correctly.' ...
+    )
+
+%%% ¡test!
+%%%% ¡name!
+Example script
+%%%% ¡probability!
+.01
+%%%% ¡code!
+example_memorycapacity()
