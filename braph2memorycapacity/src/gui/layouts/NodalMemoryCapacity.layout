@@ -28,6 +28,8 @@ NodalMemoryCapacity
 7
 Measure Plot
 8
+WAITBAR
+NaN
 Measure TRIALS
 4
 Measure TRAINING_SAMPLES
