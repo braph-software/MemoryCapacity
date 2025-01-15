@@ -47,7 +47,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 1:1:10 % subject number
+    for i = 1:1:50 % subject number
         sub_id = ['SubjectMC_' num2str(i)];
 
         h1 = WattsStrogatz(N, K1, beta1); % create two WS graph
@@ -80,7 +80,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 11:1:20
+    for i = 51:1:100
         sub_id = ['SubjectMC_' num2str(i)];
 
         h2 = WattsStrogatz(N, K2, beta2);
