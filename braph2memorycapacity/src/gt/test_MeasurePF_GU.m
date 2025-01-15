@@ -1732,7 +1732,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	warning('off', [BRAPH2.STR ':MeasurePF_GU'])
 	
 	warning('off', [BRAPH2.STR ':MeasurePF_GU'])
-	assert(length(findall(0, 'type', 'figure')) == 1)
+	assert(length(findall(0, 'type', 'figure')) == 5)
 	delete(findall(0, 'type', 'figure'))
 	warning('on', [BRAPH2.STR ':MeasurePF_GU'])
 	
