@@ -139,7 +139,7 @@ if isempty(mc_all_trials)
 else
     summed_mc_all_trials = cellfun(@(mc_all_delays) sum(mc_all_delays, 1), mc_all_trials, 'UniformOutput', false);
     m_value = {mean(cell2mat(summed_mc_all_trials'))};
-    m_value = m_value';
+    %m_value = m_value';
 end
 value = m_value;
 
@@ -345,6 +345,10 @@ a2_MC = AnalyzeEnsemble_CON_WU( ...
     'GR', gr2 ...
     );
 
+% set up parameters
+a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+
 % measure calculation at group level
 nodal_memorycapacity1 = a1_MC.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
 nodal_memorycapacity2 = a2_MC.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
@@ -353,3 +357,16 @@ assert(mean(cell2mat(nodal_memorycapacity1)) > mean(cell2mat(nodal_memorycapacit
     [BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
     'NodalMemoryCapacity does not calculate memory capacity correctly.' ...
     )
+
+gui = GUIElement('PE', a_MC1);
+gui.get('DRAW');
+gui.get('SHOW');
+gui.get('CLOSE');
+
+%%% ¡test!
+%%%% ¡name!
+Example script
+%%%% ¡probability!
+.01
+%%%% ¡code!
+example_memorycapacity

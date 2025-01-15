@@ -338,6 +338,10 @@ a2_MC = AnalyzeEnsemble_CON_WU( ...
     'GR', gr2 ...
     );
 
+% set up parameters
+a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+
 % measure calculation at group level
 global_memorycapacity1 = a1_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
 global_memorycapacity2 = a2_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
@@ -346,3 +350,11 @@ assert(mean(cell2mat(global_memorycapacity1)) > mean(cell2mat(global_memorycapac
     [BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
     'GlobalMemoryCapacity does not calculate memory capacity correctly.' ...
     )
+
+%%% ¡test!
+%%%% ¡name!
+Example script
+%%%% ¡probability!
+.01
+%%%% ¡code!
+example_memorycapacity

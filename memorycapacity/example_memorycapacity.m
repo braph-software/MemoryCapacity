@@ -38,6 +38,12 @@ a_MC2 = AnalyzeEnsemble_CON_WU( ...
     'GR', gr2 ...
     );
 
+% measure parameter setup
+a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+
 % measure calculation at group level for group 1 & 2
 global_memorycapacity1 = a_MC1.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
 nodal_memorycapacity1 = a_MC1.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
