@@ -13,11 +13,29 @@ pipeline_name = 'memorycapacity';
 braph2_dir = ['braph2' pipeline_name];
 pipelinegenesis_dir = [braph2_dir '_genesis']; % gets the name of the script being executed
 if ~exist(braph2genesis_dir, 'dir') 
-    repo_name = 'BRAPH-2';
-    tag = '2.0.0'; % specifies the version of BRAPH-2 to download. Here, '2.0.0' refers to the stable release version as of 12 January 2025.
-    repo = ['https://github.com/braph-software/' repo_name '/archive/refs/tags/' tag '.zip'];
-    zipfile = [repo_name '-' tag '.zip'];
+    repo_name = 'BRAPH-2'; % name of the repository to download
+    
+    % specify the reference type:
+    % 'tags' for stable tagged versions (e.g., release versions like '2.0.0'),
+    % 'heads' for ongoing branches (e.g., 'develop').
+    ref = 'tags';
+
+    % specify the version or branch:
+    % For example, '2.0.0' refers to the stable release version as of 12 January 2025 and corresponds to 'tags'.
+    % 'develop' refers to the ongoing development branch and correspods to 'heads'
+    ver = '2.0.0';
+    
+    % construct the GitHub URL for the desired repository version
+    repo = ['https://github.com/braph-software/' repo_name '/archive/refs/' ref '/' ver '.zip'];
+
+    % download the repository ZIP file from the specified URL
+    zipfile = [repo_name '-' ref '-' ver '.zip'];
+    
+    disp(['Downloading ' repo_name ' (' ref ': ' ver ')...']);
+    disp(['From: ' repo]);
+    disp(['To: ' zipfile]);
     websave(zipfile, repo);
+    disp('Download complete.');
     
     % create directory for braph2genesis
     tmp_dir = 'tmp_unzip';
@@ -28,7 +46,7 @@ if ~exist(braph2genesis_dir, 'dir')
     unzip(zipfile, tmp_dir)
     
     % copy braph2genesis from unzipped folder
-    copyfile([fileparts(which(pipelinegenesis_dir)) filesep tmp_dir filesep repo_name '-' tag filesep braph2genesis_dir], ...
+    copyfile([fileparts(which(pipelinegenesis_dir)) filesep tmp_dir filesep repo_name '-' ver filesep braph2genesis_dir], ...
         [fileparts(which(pipelinegenesis_dir)) filesep braph2genesis_dir])
     
     % remove not needed directory and file
@@ -161,10 +179,11 @@ if ~exist(target_dir, 'dir')
     disp('')
     
     braph2(false)
-    % test only on those new elements or test_braph2 all
 
-    % test_braph2
-    for i = 1:1:numel(new_element_gen_list) % test only on new elements
-        eval(['test_' char(extractBetween(new_element_gen_list{i}, '_', '.gen'))])
+    % test only the newly generated elements (code below) or test all compiled elements using 'test_braph2'.
+    % To test all elements, run: test_braph2
+    for i = 1:numel(new_element_gen_list) % Loop through and test each new element
+        % Extract the element name from the list and evaluate its corresponding test function
+        eval(['test_' char(extractBetween(new_element_gen_list{i}, '_', '.gen'))]);
     end
 end
