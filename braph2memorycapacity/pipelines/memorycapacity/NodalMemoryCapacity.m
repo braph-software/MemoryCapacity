@@ -867,8 +867,10 @@ classdef NodalMemoryCapacity < Measure
 					    m_value = {};
 					else
 					    summed_mc_all_trials = cellfun(@(mc_all_delays) sum(mc_all_delays, 1), mc_all_trials, 'UniformOutput', false);
-					    m_value = {mean(cell2mat(summed_mc_all_trials'))};
-					    m_value = m_value';
+                        % Convert the cell array 'summed_mc_all_trials' to a matrix, compute the mean across rows,
+                        %  and store the result as a column vector in a cell.
+                        %  The double transpose ensures the output for each cell is a column vector (e.g., 68x1 for degree).
+                        m_value = {mean(cell2mat(summed_mc_all_trials'))'};
 					end
 					value = m_value;
 					

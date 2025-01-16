@@ -22,7 +22,7 @@ gr2 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get(
 a1 = AnalyzeEnsemble_CON_WU('GR', gr1); % Analyze Group 1 % Group 1
 
 %% Analysis 2 (Memory Capacity)
-a2 = AnalyzeEnsemble_CON_WU('GR', gr2); % Analyze Group 2 % Group 2
+a2 = AnalyzeEnsemble_CON_WU('GR', gr2, 'TEMPLATE', a1); % Analyze Group 2 % Group 2
 
 %% Comparison (Memory Capacity)
 c = CompareEnsemble('P', 1000, 'A1', a1, 'A2', a2, 'MEMORIZE', true); % Compare Groups % Group Comparison

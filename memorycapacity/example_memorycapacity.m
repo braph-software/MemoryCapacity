@@ -44,12 +44,22 @@ a2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS
 a1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
 a2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
 
-% Calculate memory capacity at group level for group 1 & 2
-gmc1 = a1.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
-nmc1 = a1.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+% Calculate and memorize the memory capacity at group level for group 1 & 2
+gmc1 = a1.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').memorize('M');
+nmc1 = a1.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').memorize('M');
 
-gmc2 = a2.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
-nmc2 = a2.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+gmc2 = a2.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').memorize('M');
+nmc2 = a2.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').memorize('M');
+
+% Plot the nodal memory capacity on a brain surface at group level
+pf = MeasureEnsembleBrainPF_NU('ME', a1.get('ME_DICT').get('IT', 'NodalMemoryCapacity'), 'BA', ba);
+gui = GUIFig('PF', pf, 'CLOSEREQ', false);
+gui.get('DRAW');
+gui.get('SHOW')
+
+pf.get('ST_SURFACE').set('FACEALPHA', 0.05);
+
+gui.get('CLOSE')
 
 % Calculate memory capacity at individual level for group 1
 num_subject = gr1.get('SUB_DICT').get('LENGTH');
@@ -81,3 +91,13 @@ gmc_p1 = c_WU.get('COMPARISON', 'GlobalMemoryCapacity').get('P1');
 gmc_p2 = c_WU.get('COMPARISON', 'GlobalMemoryCapacity').get('P2');
 gmc_cil = c_WU.get('COMPARISON', 'GlobalMemoryCapacity').get('CIL');
 gmc_ciu = c_WU.get('COMPARISON', 'GlobalMemoryCapacity').get('CIU');
+
+% Plot the comparison for nodal memory capacity on a brain surface at group level
+pf = ComparisonEnsembleBrainPF_NU('CP', c_WU.get('CP_DICT').get('IT', 'NodalMemoryCapacity'), 'BA', ba);
+gui = GUIFig('PF', pf, 'CLOSEREQ', false);
+gui.get('DRAW');
+gui.get('SHOW')
+
+pf.get('ST_SURFACE').set('FACEALPHA', 0.05);
+pf.set('SIZE_DIFF', 'off');
+gui.get('CLOSE')
