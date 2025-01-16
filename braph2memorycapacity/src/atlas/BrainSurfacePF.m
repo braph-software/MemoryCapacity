@@ -338,7 +338,7 @@ classdef BrainSurfacePF < PanelFig
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'BrainSurfacePF'  'MeasureEnsembleBrainPF'  'MeasureEnsembleBrainPF_GU'  'MeasureEnsembleBrainPF_NU'  'BrainAtlasPF' }; %CET: Computational Efficiency Trick
+			subclass_list = { 'BrainSurfacePF'  'ComparisonEnsembleBrainPF'  'ComparisonEnsembleBrainPF_BB'  'ComparisonEnsembleBrainPF_BS'  'ComparisonEnsembleBrainPF_BU'  'ComparisonEnsembleBrainPF_GB'  'ComparisonEnsembleBrainPF_GS'  'ComparisonEnsembleBrainPF_GU'  'ComparisonEnsembleBrainPF_NB'  'ComparisonEnsembleBrainPF_NS'  'ComparisonEnsembleBrainPF_NU'  'MeasureEnsembleBrainPF'  'MeasureEnsembleBrainPF_GU'  'MeasureEnsembleBrainPF_NU'  'BrainAtlasPF' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of panel figure for brain surface.

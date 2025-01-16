@@ -1516,18 +1516,22 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	
 	gr2 = im_gr2.get('GR');
 	
-	% Analysis Global MC
-	a1_MC = AnalyzeEnsemble_CON_WU( ...
+	% Analysis
+	a1 = AnalyzeEnsemble_CON_WU( ...
 	    'GR', gr1 ...
 	    );
 	
-	a2_MC = AnalyzeEnsemble_CON_WU( ...
+	a2 = AnalyzeEnsemble_CON_WU( ...
 	    'GR', gr2 ...
 	    );
 	
-	% measure calculation at group level
-	global_memorycapacity1 = a1_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
-	global_memorycapacity2 = a2_MC.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+	% Set up parameters
+	a1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+	a2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+	
+	% Calculate memory capacity at group level
+	global_memorycapacity1 = a1.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+	global_memorycapacity2 = a2.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
 	
 	assert(mean(cell2mat(global_memorycapacity1)) > mean(cell2mat(global_memorycapacity2)), ...
 	    [BRAPH2.STR ':GlobalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
