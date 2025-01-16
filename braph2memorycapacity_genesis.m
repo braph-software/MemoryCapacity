@@ -9,34 +9,38 @@ clc
 
 %% Download braph2genesis
 braph2genesis_dir = 'braph2genesis';
+pipeline_name = 'memorycapacity';
+braph2_dir = ['braph2' pipeline_name];
+pipelinegenesis_dir = [braph2_dir '_genesis']; % gets the name of the script being executed
 if ~exist(braph2genesis_dir, 'dir') 
-    repo = 'https://github.com/braph-software/BRAPH-2/archive/refs/heads/develop.zip';
-    zipfile = 'BRAPH-2-develop.zip';
+    repo_name = 'BRAPH-2';
+    tag = '2.0.0'; % specifies the version of BRAPH-2 to download. Here, '2.0.0' refers to the stable release version as of 12 January 2025.
+    repo = ['https://github.com/braph-software/' repo_name '/archive/refs/tags/' tag '.zip'];
+    zipfile = [repo_name '-' tag '.zip'];
     websave(zipfile, repo);
     
     % create directory for braph2genesis
-    folder_tmp = 'tmp_unzip';
-    folder_genesis = 'braph2genesis';
-    mkdir(folder_tmp);
-    mkdir(folder_genesis)
+    tmp_dir = 'tmp_unzip';
+    mkdir(tmp_dir);
+    mkdir(braph2genesis_dir)
     
     % unzip braph
-    unzip(zipfile, folder_tmp)
+    unzip(zipfile, tmp_dir)
     
     % copy braph2genesis from unzipped folder
-    copyfile([fileparts(which('braph2memorycapacity_genesis')) filesep 'tmp_unzip' filesep 'BRAPH-2-develop' filesep 'braph2genesis'], ...
-        [fileparts(which('braph2memorycapacity_genesis')) filesep 'braph2genesis'])
+    copyfile([fileparts(which(pipelinegenesis_dir)) filesep tmp_dir filesep repo_name '-' tag filesep braph2genesis_dir], ...
+        [fileparts(which(pipelinegenesis_dir)) filesep braph2genesis_dir])
     
     % remove not needed directory and file
-    rmdir(folder_tmp, 's')
+    rmdir(tmp_dir, 's')
     delete(zipfile)
 end
 
-addpath(['.' filesep() 'braph2genesis'])
-addpath(['.' filesep() 'braph2genesis' filesep() 'genesis'])
+addpath(['.' filesep() braph2genesis_dir])
+addpath(['.' filesep() braph2genesis_dir filesep() 'genesis'])
 
 %% Move memorycapacity to pipelines folder
-copyfile([fileparts(which('braph2memorycapacity_genesis')) filesep 'memorycapacity'], [fileparts(which('braph2genesis')) filesep 'pipelines' filesep 'memorycapacity'])
+copyfile([fileparts(which(pipelinegenesis_dir)) filesep pipeline_name], [braph2genesis_dir filesep 'pipelines' filesep pipeline_name])
 
 %% Add here all included and excluded folders and elements
 % '-folder'                 the folder and its elements will be excluded
@@ -56,7 +60,13 @@ rollcall = { ...
     '+gt', '+_Measure.gen.m', '+_Graph.gen.m', '+_GraphAdjPF.gen.m', '+_GraphHistPF.gen.m', '+_GraphPP_MDict.gen.m', '+_NoValue.gen.m', ...
         '+_MeasurePF.gen.m', '+_MeasurePF_GU.gen.m', '+_MeasurePF_NU.gen.m', '+_MeasurePF_NxPP_Node.gen.m', '+_MeasurePF_xUPP_Layer.gen.m', ...
     '+cohort*', ...
-    '+analysis', '+_AnalyzeEnsemble.gen.m', '+_AnalyzeEnsemblePP_GDict.gen.m', '+_AnalyzeEnsemblePP_MeDict.gen.m', '+_MeasureEnsemble.gen.m', ...
+    '+analysis', '+_AnalyzeEnsemble.gen.m', '+_AnalyzeEnsemblePP_GDict.gen.m', '+_AnalyzeEnsemblePP_MeDict.gen.m', '+_CompareEnsemble.gen.m', '+_CompareEnsemblePP_CpDict.gen.m', ...
+        '+_ComparisonEnsemble.gen.m', '+_ComparisonEnsembleBrainPF.gen.m', '+_ComparisonEnsembleBrainPF_BB.gen.m', '+_ComparisonEnsembleBrainPF_BS.gen.m', '+_ComparisonEnsembleBrainPF_BU.gen.m', ...
+        '+_ComparisonEnsembleBrainPF_GB.gen.m', '+_ComparisonEnsembleBrainPF_GS.gen.m', '+_ComparisonEnsembleBrainPF_GU.gen.m', '+_ComparisonEnsembleBrainPF_NB.gen.m', '+_ComparisonEnsembleBrainPF_NS.gen.m', ...
+        '+_ComparisonEnsembleBrainPF_NU.gen.m', '+_ComparisonEnsembleBrainPF_xSPP_Layer.gen.m', '+_ComparisonEnsembleBrainPF_xUPP_Layer.gen.m', '+_ComparisonEnsemblePF.gen.m', ...
+        '+_ComparisonEnsemblePF_BB.gen.m', '+_ComparisonEnsemblePF_BS.gen.m', '+_ComparisonEnsemblePF_BU.gen.m', '+_ComparisonEnsemblePF_BxPP_Nodes.gen.m', '+_ComparisonEnsemblePF_GB.gen.m', ...
+        '+_ComparisonEnsemblePF_GS.gen.m', '+_ComparisonEnsemblePF_GU.gen.m', '+_ComparisonEnsemblePF_NB.gen.m', '+_ComparisonEnsemblePF_NS.gen.m', '+_ComparisonEnsemblePF_NU.gen.m', '+_ComparisonEnsemblePF_NxPP_Node.gen.m', ...
+        '+_ComparisonEnsemblePF_xUPP_Layer.gen.m', '+_MeasureEnsemble.gen.m', ...
         '+_MeasureEnsembleBrainPF.gen.m', '+_MeasureEnsembleBrainPF_GU.gen.m', '+_MeasureEnsembleBrainPF_NU.gen.m', '+_MeasureEnsembleBrainPF_xUPP_Layer.gen.m', ...
         '+_MeasureEnsemblePF.gen.m', '+_MeasureEnsemblePF_GU.gen.m', '+_MeasureEnsemblePF_NU.gen.m', '+_MeasureEnsemblePF_NxPP_Node.gen.m', '+_MeasureEnsemblePF_xUPP_Layer.gen.m', ...
         '+_PanelPropCellFDR.gen.m', ...
@@ -109,7 +119,7 @@ for i = 1:rollcall_per_line:length(rollcall)
 end
 disp(' ')
 
-target_dir = [fileparts(fileparts(which('braph2genesis'))) filesep 'braph2memorycapacity'];
+target_dir = [fileparts(which(pipelinegenesis_dir)) filesep braph2_dir];
 if exist(target_dir, 'dir') 
     if input([ ...
         'The target directory already exists:\n' ...
@@ -139,6 +149,10 @@ if ~exist(target_dir, 'dir')
     delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_analysis_but.braph2'])
     delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_comparison_bud.braph2'])
     delete([fileparts(which('braph2')) filesep 'pipelines' filesep 'connectivity' filesep 'pipeline_connectivity_comparison_but.braph2'])
+    new_element_gen_list = getGenerators([fileparts(which('braph2memorycapacity_genesis')) filesep 'memorycapacity']);
+
+    % remove genesis directory
+    rmdir(braph2genesis_dir, 's')
 
     time_end = toc(time_start);
 
@@ -147,11 +161,10 @@ if ~exist(target_dir, 'dir')
     disp('')
     
     braph2(false)
+    % test only on those new elements or test_braph2 all
 
-    %test_braph2
-    test_GlobalMemoryCapacity
-    test_NodalMemoryCapacity
-
-    % remove genesis directory
-    rmdir(braph2genesis_dir, 's')
+    % test_braph2
+    for i = 1:1:numel(new_element_gen_list) % test only on new elements
+        eval(['test_' char(extractBetween(new_element_gen_list{i}, '_', '.gen'))])
+    end
 end
