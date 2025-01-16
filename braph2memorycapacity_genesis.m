@@ -16,13 +16,13 @@ if ~exist(braph2genesis_dir, 'dir')
     repo_name = 'BRAPH-2'; % name of the repository to download
     
     % specify the reference type:
-    % 'tags' for stable tagged versions (e.g., release versions like '2.0.0'),
-    % 'heads' for ongoing branches (e.g., 'develop').
+    %  'tags' for stable tagged versions (e.g., release versions like '2.0.0'),
+    %  'heads' for ongoing branches (e.g., 'develop').
     ref = 'tags';
 
     % specify the version or branch:
-    % For example, '2.0.0' refers to the stable release version as of 12 January 2025 and corresponds to 'tags'.
-    % 'develop' refers to the ongoing development branch and correspods to 'heads'
+    %  for example, '2.0.0' refers to the stable release version as of 12 January 2025 and corresponds to 'tags'.
+    %  'develop' refers to the ongoing development branch and correspods to 'heads'
     ver = '2.0.0';
     
     % construct the GitHub URL for the desired repository version
