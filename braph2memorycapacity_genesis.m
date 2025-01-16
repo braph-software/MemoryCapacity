@@ -174,7 +174,7 @@ if ~exist(target_dir, 'dir')
 
     time_end = toc(time_start);
 
-    disp( 'BRAPH 2 Memory Capacity is now fully compiled and ready to be used.')
+    disp(['BRAPH 2 (' braph2_dir ') is now fully compiled and ready to be used.'])
     disp(['Its compilation has taken ' int2str(time_end) '.' int2str(mod(time_end, 1) * 10) 's'])
     disp('')
     
