@@ -15,14 +15,14 @@
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas
 
 %% Group
-gr1 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 1 from XLS % Group CON 1
-gr2 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 2 from XLS % Group CON 2
+gr1 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group MC 1 from XLS % Group MC 1
+gr2 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group MC 2 from XLS % Group MC 2
 
 %% Analysis 1 (Memory Capacity)
-a_WU1 = AnalyzeEnsemble_CON_WU('GR', gr1); % Analyze Group 1  % Group 1
+a1 = AnalyzeEnsemble_CON_WU('GR', gr1); % Analyze Group 1 % Group 1
 
 %% Analysis 2 (Memory Capacity)
-a_WU2 = AnalyzeEnsemble_CON_WU('GR', gr2); % Analyze Group 2 % Group 2
+a2 = AnalyzeEnsemble_CON_WU('GR', gr2); % Analyze Group 2 % Group 2
 
 %% Comparison (Memory Capacity)
-c_WU = CompareEnsemble('P', 1000, 'A1', a_WU1, 'A2', a_WU2, 'MEMORIZE', true); % Compare Groups % Group Comparison
+c = CompareEnsemble('P', 1000, 'A1', a1, 'A2', a2, 'MEMORIZE', true); % Compare Groups % Group Comparison

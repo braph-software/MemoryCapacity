@@ -30,41 +30,41 @@ im_gr2 = ImporterGroupSubjectCON_XLS( ...
 gr2 = im_gr2.get('GR');
 
 %% Analysis Memory Capacity
-a_MC1 = AnalyzeEnsemble_CON_WU( ...
+a1 = AnalyzeEnsemble_CON_WU( ...
     'GR', gr1 ...
     );
 
-a_MC2 = AnalyzeEnsemble_CON_WU( ...
+a2 = AnalyzeEnsemble_CON_WU( ...
     'GR', gr2 ...
     );
 
-% measure parameter setup
-a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
-a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
-a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
-a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+% set up parameters
+a1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+a2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'GlobalMemoryCapacity').set('TRIALS', 2);
+a1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+a2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
 
-% measure calculation at group level for group 1 & 2
-global_memorycapacity1 = a_MC1.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
-nodal_memorycapacity1 = a_MC1.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+% Calculate memory capacity at group level for group 1 & 2
+gmc1 = a1.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+nmc1 = a1.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
 
-global_memorycapacity2 = a_MC2.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
-nodal_memorycapacity2 = a_MC2.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+gmc2 = a2.get('MEASUREENSEMBLE', 'GlobalMemoryCapacity').get('M');
+nmc2 = a2.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
 
-% measure calculation at individual level for group 1
+% Calculate memory capacity at individual level for group 1
 num_subject = gr1.get('SUB_DICT').get('LENGTH');
 global_memorycapacity_subject = cell(1, num_subject);
-nodal_memorycapacity_subject  = cell(1, num_subject);
+nmc_subject  = cell(1, num_subject);
 for i = 1:1:num_subject
-    global_memorycapacity_subject{i} = a_MC1.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'GlobalMemoryCapacity').get('M');
-    nodal_memorycapacity_subject{i}  = a_MC1.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'NodalMemoryCapacity').get('M');
+    gmc_subject{i} = a1.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'GlobalMemoryCapacity').get('M');
+    nmc_subject{i}  = a1.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'NodalMemoryCapacity').get('M');
 end
 
 %% Comparison Memory Capacity
 c_WU = CompareEnsemble( ...
     'P', 10, ...
-    'A1', a_MC1, ...
-    'A2', a_MC2, ...
+    'A1', a1, ...
+    'A2', a2, ...
     'WAITBAR', true, ...
     'VERBOSE', false, ...
     'MEMORIZE', true ...
