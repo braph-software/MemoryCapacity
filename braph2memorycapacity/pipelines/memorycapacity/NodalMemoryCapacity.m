@@ -867,8 +867,8 @@ classdef NodalMemoryCapacity < Measure
 					    m_value = {};
 					else
 					    summed_mc_all_trials = cellfun(@(mc_all_delays) sum(mc_all_delays, 1), mc_all_trials, 'UniformOutput', false);
-                        m_value = {mean(cell2mat(summed_mc_all_trials'))};
-                        m_value = m_value';
+					    m_value = {mean(cell2mat(summed_mc_all_trials'))};
+					    m_value = m_value';
 					end
 					value = m_value;
 					
