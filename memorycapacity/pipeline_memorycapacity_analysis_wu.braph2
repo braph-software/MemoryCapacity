@@ -13,7 +13,7 @@
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas
 
 %% Group
-gr = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON from XLS % Group CON
+gr = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group MC from XLS % Group MC
 
 %% Analysis (Memory Capacity)
-a_WU = AnalyzeEnsemble_CON_WU('GR', gr); % Analyze Group % Group 
+a = AnalyzeEnsemble_CON_WU('GR', gr); % Analyze Group % Group 

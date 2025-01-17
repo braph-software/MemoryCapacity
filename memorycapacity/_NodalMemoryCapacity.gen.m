@@ -138,8 +138,12 @@ if isempty(mc_all_trials)
     m_value = {};
 else
     summed_mc_all_trials = cellfun(@(mc_all_delays) sum(mc_all_delays, 1), mc_all_trials, 'UniformOutput', false);
-    m_value = {mean(cell2mat(summed_mc_all_trials'))};
-    %m_value = m_value';
+    % Convert the cell array 'summed_mc_all_trials' to a matrix, compute the mean across rows,
+    %  and store the result as a column vector in a cell.
+    %  The double transpose ensures the output for each cell is a column vector (e.g., 68x1 for degree).
+    %  This uniform output shape is important for correctly visualising on
+    %  a brain surface.
+    m_value = {mean(cell2mat(summed_mc_all_trials'))'};
 end
 value = m_value;
 
@@ -336,32 +340,27 @@ im_gr2 = ImporterGroupSubjectCON_XLS( ...
 
 gr2 = im_gr2.get('GR');
 
-% Analysis Global MC
-a1_MC = AnalyzeEnsemble_CON_WU( ...
+% Analysis
+a1 = AnalyzeEnsemble_CON_WU( ...
     'GR', gr1 ...
     );
 
-a2_MC = AnalyzeEnsemble_CON_WU( ...
+a2 = AnalyzeEnsemble_CON_WU( ...
     'GR', gr2 ...
     );
 
 % set up parameters
-a_MC1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
-a_MC2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+a1.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
+a2.memorize('GRAPH_TEMPLATE').get('MEASURE', 'NodalMemoryCapacity').set('TRIALS', 2);
 
-% measure calculation at group level
-nodal_memorycapacity1 = a1_MC.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
-nodal_memorycapacity2 = a2_MC.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+% Calculate memory capacity at group level
+nodal_memorycapacity1 = a1.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
+nodal_memorycapacity2 = a2.get('MEASUREENSEMBLE', 'NodalMemoryCapacity').get('M');
 
 assert(mean(cell2mat(nodal_memorycapacity1)) > mean(cell2mat(nodal_memorycapacity2)), ...
     [BRAPH2.STR ':NodalMemoryCapacity:' BRAPH2.FAIL_TEST], ...
     'NodalMemoryCapacity does not calculate memory capacity correctly.' ...
     )
-
-gui = GUIElement('PE', a_MC1);
-gui.get('DRAW');
-gui.get('SHOW');
-gui.get('CLOSE');
 
 %%% ¡test!
 %%%% ¡name!
