@@ -59,6 +59,7 @@ In this tutorial it will be explained \emph{Pipeline Memory Capacity Comparison 
 
 Once the pipeline is uploaded, you can see a GUI that contains different steps to: upload a brain atlas, upload the connectivity data of two groups, analyze them, and finally, compare the groups (\Figref{fig:03}). 
 
+%! FIG3 !%
 \fig{marginfigure}
 {fig:03}
 {
@@ -75,6 +76,7 @@ Once the pipeline is uploaded, you can see a GUI that contains different steps t
 
 \Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the data for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas}.
 
+%! FIG4 !%
 \fig{figure*}
 {fig:04}
 {
@@ -93,6 +95,7 @@ Once the pipeline is uploaded, you can see a GUI that contains different steps t
 
 After you have loaded the brain atlas, you can upload the \emph{Group MC data} for each group as shown in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s connectivity matrices by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{Group of Subjects with Connectivity Data}).
 
+%! FIG5 !%
 \fig{figure*}
 {fig:05}
 {
@@ -107,7 +110,6 @@ After you have loaded the brain atlas, you can upload the \emph{Group MC data} f
 }
 
 
-%! FIG5 !%
 
 \clearpage
 \section{Step 3: Analyzing the Data of Group 1}
@@ -141,6 +143,7 @@ In the \code{GRAPH \& MEASURE PARAMETERS} section, you can define the following 
 	
 \end{itemize}
 
+%! FIG6 !%
 \fig{figure}
 {fig:06}
 {
@@ -150,7 +153,7 @@ In the \code{GRAPH \& MEASURE PARAMETERS} section, you can define the following 
 {
 	{\bf a} By clicking on the section \code{GRAPH \& MEASURE PARAMETERS}, you open {\bf b} a new interface that permits you to configure the graph parameters. {\bf c} The available parameters shall be set at this point.
 }
-%! FIG6 !%
+
 
 
 \clearpage
@@ -167,6 +170,7 @@ After configuring the parameters, you can proceed to calculate specific graph me
 
  More details about the calculation of these two measures can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).
 
+%! FIG7 !%
 \fig{figure*}
 {fig:07}
 {
@@ -181,7 +185,6 @@ After configuring the parameters, you can proceed to calculate specific graph me
 	{\bf e} Customize and save plot visualizations within the settings menu.
 }
 
-%! FIG7 !%
 
 As an example, let us select the \code{NodalMemoryCapacity} measure. Right-click at the top of the table and choose \code{Calculate Selected Measures}. Once the calculation is complete, you will notice a \code{C} appearing in front of the \code{NodalMemoryCapacity} row, indicating that this measure has been calculated.
 
@@ -200,6 +203,7 @@ Finally, when you right-click in the \code{Group-averaged MEASURES} panel, you w
 
 After completing the analysis of the first group, you can analyze the second group by simply clicking on \code{Analyze Group 2} (\Figref{fig:8}a). You will notice that in the new GUI (\Figref{fig:8}b-c), the parameters you previously selected for the first group are already preselected and fixed for this analysis. 
 
+%! FIG8 !%
 \fig{figure*}
 {fig:8}
 {
@@ -211,7 +215,7 @@ After completing the analysis of the first group, you can analyze the second gro
 	{\bf b} In this new window, you can see that the measure parameters, when clicking {\bf b} \fn{GRAPH TEMPLATE}, such as  {\bf c} \fn{SYMMETRIZATION RULE},  \fn{NEGATIVE WEIGHTS RULE}, \fn{NORMALIZATION RULE} and \fn{RANDOMIZATION} settings are blocked since they should be the same as the ones set in the analysis of group 1. You can reset the analysis parameters for Group 1 by clicking on the checkbox marked with a \code{D} next to the settings of Group 1.
 }
 
-%! FIG8 !%
+
 
 
 \clearpage
@@ -219,6 +223,7 @@ After completing the analysis of the first group, you can analyze the second gro
 
 After exploring the memory capacity measures for each group, you can proceed to their statistical comparison by clicking on \code{Compare Groups} (\Figref{fig:9}a).
 
+%! FIG9 !%
 \fig{figure}
 {fig:9}
 {
@@ -229,7 +234,6 @@ After exploring the memory capacity measures for each group, you can proceed to 
 	{\bf a} Click on \code{Compare Groups} in the pipeline's GUI. A new window will pop up, where you can select to turn ON/OFF the wait bar and verbose functions, you can change the number of permutations, and whether to perform a longitudinal group comparison. We set the number of permutations to 10 for this tutorial {\bf b}. Finally, you can calculate the comparisons of some graph measures between groups {\bf c}.
 }
 
-%! FIG9 !%
 
 In the new window, you have several options to configure the analysis. First, you can choose whether to enable a progress bar and verbose functions while the analysis is running, which can help you monitor the progress of the analysis. You can also specify how many permutations you want to use to assess differences between groups (\Figref{fig:9}b). For computational efficiency, in this tutorial we have set the number of permutations to 10. However, for your research analysis, we recommend using a higher number, such as 1000 or 10000 permutations, to ensure the results are robust.
 
@@ -241,6 +245,7 @@ If you have enabled the progress bar and verbose functions, two additional windo
 
 To obtain the results from the comparisons, select the measures in the \code{COMPARISONS} panel and press \code{Data Selected Comparisons} ({\Figref{fig:9}d}), and a new window will open where we can check the value of the difference between groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals.
 
+%! FIG10 !%
 \fig{figure*}
 {fig:10}
 {
@@ -253,7 +258,6 @@ To obtain the results from the comparisons, select the measures in the \code{COM
 	{\bf c} You can customize this visualization using the settings menu.
 }
 
-%! FIG10 !%
 
 If you wish to visualize the results, right-click at the top of the table and select \code{Brain Graph Selected Comparison} within the Compare Ensemble interface (\Figref{fig:10}a). This action will open a brain surface displaying the difference between these two groups in terms of the \fn{NodalMemoryCapacity} data or any other nodal measure you have calculated.
 
