@@ -1,6 +1,6 @@
-# Pipeline for Analysis Comparison of Memory Capacity using Weighted Undirected Graph
+# Pipeline for Analysis and Comparison of Memory Capacity using Weighted Undirected Graph
 
-[![Tutorial Pipeline for Analysis Comparison of Memory Capacity using Weighted Undirected Graph](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_mc_wu.pdf)
+[![Tutorial Pipeline for Analysis and Comparison of Memory Capacity using Weighted Undirected Graph](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_mc_wu.pdf)
 
 This tutorial shows how to perform a *reservoir computing* analysis using *connectivity data* (see tutorial [Group of Subjects with Connectivity Data](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con)), where one connectivity matrix per subject is available, as in diffusion weighted imaging or pre-calculated matrices obtained from functional MRI, MEG, or EEG. Step by step, this pipeline guides you to first analyze the data of a group of subjects and then compare the data from two groups of subjects, were matrices are *weighted undirected*.  With this tutorial, you will be able to extract and plot differences between two groups. You will also be able to generate publication-quality figures.
 
