@@ -16,6 +16,7 @@ This tutorial shows how to perform a \emph{reservoir computing} analysis using \
 \tableofcontents
 
 \clearpage
+
 \section{Generate Example Data}
 
 You can generate the example data by typing in the command line the instruction in \Coderef{cd:generate}.
@@ -30,7 +31,86 @@ You can generate the example data by typing in the command line the instruction 
 	create_data_memorycapacity()
 \end{lstlisting}
 
-\section{Open the GUI}
+After creating the example data, you can run \Coderef{cd:example} (optional)
+
+\begin{lstlisting}[
+	label=cd:example,
+	caption={
+		{\bf Execute Memory Capacity Example.}
+		This is an example script demonstrating how to perform Steps 1-5 of this tutorial.
+	}
+	]
+	 example_memorycapacity()
+\end{lstlisting}
+
+\section{Usage through MATLAB command line (suggested use)}
+\begin{enumerate}
+	
+	\item {\bf Open} the \href{https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity}{braph2memorycapacity}  folder.
+	
+	\item {\bf Execute} the \code{braph2.m} script in MATLAB. This script loads BRAPH 2.0 and all related dependencies.
+	
+	\item \code{NORMALIZATION RULE} determines how to normalize the weights between 0 and 1.There are two options \code{threshold range},
+	
+	\item {\bf Close} the main graphical interface that appears. BRAPH 2.0 software is now fully loaded and ready to use.
+	
+	
+	\item{\bf  Load brain atlas}. Braph atlas can be loaded by executing the following code:
+	\begin{lstlisting}[
+	label=cd:atlas,
+			caption={
+			{\bf Command to load brain atlas.}
+			This loads the atlas contained in the "atlas.xlsx" file. A custom atlas can be uploaded by changing the file name; please ensure that the atlas is also in the .xlsx format. For more information about how to create brain atlas file, please check the following \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{tutorial} , as well as the folder \href{https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases}{atlases} which contains several already prepared atlases ready to use with BRAPH 2.0.
+		}
+		]
+		im_ba = ImporterBrainAtlasXLS( ...
+		'FILE', ['atlas.xlsx'], ...
+		'WAITBAR', true ...
+		);
+		ba = im_ba.get('BA');
+	\end{lstlisting}
+	
+	
+	\item {\bf  Load group of subjects}. Subjects can be loaded using the following:
+		\begin{lstlisting}[
+		label=cd:loadsubj,
+		caption={
+			{\bf Command to load group of subjects.}
+			The data for all subjects should be contained in a single folder (in this example, named "MC\_Group\_1\_XLS"). Each subject's connectivity matrix should be contained in a single, separate Excel file. For more information about how to create subject files, please check the following \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{tutorial}.
+		}
+		]
+		im_gr1 = ImporterGroupSubjectCON_XLS( ...
+		'DIRECTORY', ['MC_Group_1_XLS'], ...
+		'BA', ba, ...
+		'WAITBAR', true ...
+		);
+		gr1 = im_gr1.get('GR');
+	\end{lstlisting}
+	
+	\item {\bf  Get memory capacity values for individual subjects (optional)}.
+			\begin{lstlisting}[
+		label=cd:loadsubj,
+		caption={
+			{\bf Command to load group of subjects.}
+			The individual values are stored in "global\_memorycapacity\_subject" and "nodal\_memorycapacity\_subject" cell arrays, where each cell holds the data for individual subjects.
+		}
+		]
+		num_subject = gr1.get('SUB_DICT').get('LENGTH');
+		global_memorycapacity_subject = cell(1, num_subject);
+		nodal_memorycapacity_subject  = cell(1, num_subject);
+		for i = 1:1:num_subject
+		global_memorycapacity_subject{i} = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'GlobalMemoryCapacity').get('M');
+		nodal_memorycapacity_subject{i}  = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'NodalMemoryCapacity').get('M');
+		end
+	\end{lstlisting}
+	
+\end{enumerate}
+
+\section{Usage through BRAPH 2.0 Graphical User Interfaces}
+
+The pipelines of the Memory capacity distribution can also be used via the graphical interfaces integrated within BRAPH 2.0. Currently, the interfaces allow the calculation and plotting of group averaged global and nodal memory capacity (single subject calculations can only be performed through the command line).
+
+\subsection{Open the GUI}
 
 The GUI of BRAPH~2 Memory Capacity Distribution can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, as shown in \Figref{fig:01}.
 
@@ -71,7 +151,7 @@ Once the pipeline is uploaded, you can see a GUI that contains different steps t
 }
 
 \clearpage
-\section{Step 1: Load the Brain Atlas}
+\subsection{Step 1: Load the Brain Atlas}
 
 
 \Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the data for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas}.
@@ -91,7 +171,7 @@ Once the pipeline is uploaded, you can see a GUI that contains different steps t
 }
 
 \clearpage
-\section{Step 2: Load the Connectivity Group Data}
+\subsection{Step 2: Load the Connectivity Group Data}
 
 After you have loaded the brain atlas, you can upload the \emph{Group MC data} for each group as shown in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s connectivity matrices by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{Group of Subjects with Connectivity Data}).
 
@@ -112,7 +192,7 @@ After you have loaded the brain atlas, you can upload the \emph{Group MC data} f
 
 
 \clearpage
-\section{Step 3: Analyzing the Data of Group 1}
+\subsection{Step 3: Analyzing the Data of Group 1}
 
 Once you have loaded the data for both groups, you can begin analyzing the data for the first group by clicking on \fn{Analyze Group 1} (\Figref{fig:06}a). 
 This will open a new interface called \fn{Analyze Ensemble}, which allows you to calculate and visualize graph measures for the first group. 
@@ -120,7 +200,7 @@ Before these network measures are calculated, it is important to ensure that the
 
 Importantly, the parameters you select at the beginning will remain fixed for the rest of pipeline to ensure the consistency of the analysis (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
 
-\subsection{Setting Analysis Parameters}
+\subsubsection{Setting Analysis Parameters}
 
 In the \fn{Analyze Ensemble} interface (\Figref{fig:06}), you can configure the analysis parameters.
 In the \code{GRAPH \& MEASURE PARAMETERS} section, you can define the following parameters:
@@ -154,10 +234,8 @@ In the \code{GRAPH \& MEASURE PARAMETERS} section, you can define the following 
 	{\bf a} By clicking on the section \code{GRAPH \& MEASURE PARAMETERS}, you open {\bf b} a new interface that permits you to configure the graph parameters. {\bf c} The available parameters shall be set at this point.
 }
 
-
-
 \clearpage
-\subsection{Calculate Measures}
+\subsubsection{Calculate Measures}
 After configuring the parameters, you can proceed to calculate specific graph measures (\Figref{fig:07}). To do this, scroll down to locate the \fn{Group-averaged MEASURES} panel. By clicking the \code{C} button, you will see a table displaying all measures. The following two measures are available for this pipeline:
 
 \begin{itemize}
@@ -167,6 +245,7 @@ After configuring the parameters, you can proceed to calculate specific graph me
 	\item \code{Nodal Memory Capacity}:	The nodal memory capacity measures how well a given node manages to encode a random input signal applied to itself.This nodal memory capacity is determined by training the nodal output to reproduce delayed input time series  and comparing the delayed input applied to the given node with its output.  A high memory capacity indicates that the node has high capacity to remember and process the temporal  information contained in the input signal. The measure is calculated using reservoir computing, which is a recurrent neural-network model.
 	
 \end{itemize}
+
 
  More details about the calculation of these two measures can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).
 
@@ -199,7 +278,7 @@ Finally, when you right-click in the \code{Group-averaged MEASURES} panel, you w
 
 
 
-\section{Step 4: Analyzing the Data of Group 2}
+\subsection{Step 4: Analyzing the Data of Group 2}
 
 After completing the analysis of the first group, you can analyze the second group by simply clicking on \code{Analyze Group 2} (\Figref{fig:8}a). You will notice that in the new GUI (\Figref{fig:8}b-c), the parameters you previously selected for the first group are already preselected and fixed for this analysis. 
 
@@ -219,7 +298,7 @@ After completing the analysis of the first group, you can analyze the second gro
 
 
 \clearpage
-\section{Step 5: Comparing Groups}
+\subsection{Step 5: Comparing Groups}
 
 After exploring the memory capacity measures for each group, you can proceed to their statistical comparison by clicking on \code{Compare Groups} (\Figref{fig:9}a).
 

@@ -8,22 +8,27 @@ This tutorial shows how to perform a *reservoir computing* analysis using *conne
 ## Table of Contents
 > [Generate Example Data](#Generate-Example-Data)
 >
-> [Open the GUI](#Open-the-GUI)
+> [Usage through MATLAB command line (suggested use)](#Usage-through-MATLAB-command-line-suggested-use)
 >
-> [Step 1: Load the Brain Atlas](#Step-1-Load-the-Brain-Atlas)
+> [Usage through BRAPH 2.0 Graphical User Interfaces](#Usage-through-BRAPH-20-Graphical-User-Interfaces)
 >
-> [Step 2: Load the Connectivity Group Data](#Step-2-Load-the-Connectivity-Group-Data)
->
-> [Step 3: Analyzing the Data of Group 1](#Step-3-Analyzing-the-Data-of-Group-1)
->
->> [Setting Analysis Parameters](#Setting-Analysis-Parameters)
+>> [Open the GUI](#Open-the-GUI)
 >>
->> [Calculate Measures](#Calculate-Measures)
+>> [Step 1: Load the Brain Atlas](#Step-1-Load-the-Brain-Atlas)
 >>
-> [Step 4: Analyzing the Data of Group 2](#Step-4-Analyzing-the-Data-of-Group-2)
->
-> [Step 5: Comparing Groups](#Step-5-Comparing-Groups)
->
+>> [Step 2: Load the Connectivity Group Data](#Step-2-Load-the-Connectivity-Group-Data)
+>>
+>> [Step 3: Analyzing the Data of Group 1](#Step-3-Analyzing-the-Data-of-Group-1)
+>>
+>>> [Setting Analysis Parameters](#Setting-Analysis-Parameters)
+>>>
+>>> [Calculate Measures](#Calculate-Measures)
+>>>
+>> [Step 4: Analyzing the Data of Group 2](#Step-4-Analyzing-the-Data-of-Group-2)
+>>
+>> [Step 5: Comparing Groups](#Step-5-Comparing-Groups)
+>>
+
 
 
 <a id="Generate-Example-Data"></a>
@@ -39,8 +44,81 @@ You can generate the example data by typing in the command line the instruction 
 > ````
 > 
 
+After creating the example data, you can run Code 2 (optional)
+
+
+> **Code 2.** **Execute Memory Capacity Example.**
+> 		This is an example script demonstrating how to perform Steps 1-5 of this tutorial.
+> ````matlab
+> example_memorycapacity()
+> ````
+> 
+
+<a id="Usage-through-MATLAB-command-line-suggested-use"></a>
+## Usage through MATLAB command line (suggested use)  [⬆](#Table-of-Contents)
+
+	
+	- **Open** the [braph2memorycapacity](https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity)  folder.
+	
+	- **Execute** the `braph2.m` script in MATLAB. This script loads BRAPH 2.0 and all related dependencies.
+	
+	- `NORMALIZATION RULE` determines how to normalize the weights between 0 and 1.There are two options `threshold range`,
+	
+	- **Close** the main graphical interface that appears. BRAPH 2.0 software is now fully loaded and ready to use.
+	
+	
+	\item** Load brain atlas**. Braph atlas can be loaded by executing the following code:
+	
+> **Code 3.** **Command to load brain atlas.**
+> 			This loads the atlas contained in the "atlas.xlsx" file. A custom atlas can be uploaded by changing the file name; please ensure that the atlas is also in the .xlsx format. For more information about how to create brain atlas file, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba) , as well as the folder [atlases](https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases) which contains several already prepared atlases ready to use with BRAPH 2.0.
+> ````matlab
+> im_ba = ImporterBrainAtlasXLS( ...
+>         'FILE', ['atlas.xlsx'], ...
+>         'WAITBAR', true ...
+>         );
+>         ba = im_ba.get('BA');
+> ````
+> 
+	
+	
+	- ** Load group of subjects**. Subjects can be loaded using the following:
+		
+> **Code 4.** **Command to load group of subjects.**
+> 			The data for all subjects should be contained in a single folder (in this example, named "MC_Group_1_XLS"). Each subject's connectivity matrix should be contained in a single, separate Excel file. For more information about how to create subject files, please check the following [tutorial](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con).
+> ````matlab
+> im_gr1 = ImporterGroupSubjectCON_XLS( ...
+>         'DIRECTORY', ['MC_Group_1_XLS'], ...
+>         'BA', ba, ...
+>         'WAITBAR', true ...
+>         );
+>         gr1 = im_gr1.get('GR');
+> ````
+> 
+	
+	- ** Get memory capacity values for individual subjects (optional)**.
+			
+> **Code 5.** **Command to load group of subjects.**
+> 			The individual values are stored in "global_memorycapacity_subject" and "nodal_memorycapacity_subject" cell arrays, where each cell holds the data for individual subjects.
+> ````matlab
+> num_subject = gr1.get('SUB_DICT').get('LENGTH');
+>         global_memorycapacity_subject = cell(1, num_subject);
+>         nodal_memorycapacity_subject  = cell(1, num_subject);
+>         for i = 1:1:num_subject
+>         global_memorycapacity_subject{i} = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'GlobalMemoryCapacity').get('M');
+>         nodal_memorycapacity_subject{i}  = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'NodalMemoryCapacity').get('M');
+>         end
+> ````
+> 
+	
+
+
+<a id="Usage-through-BRAPH-20-Graphical-User-Interfaces"></a>
+## Usage through BRAPH 2.0 Graphical User Interfaces  [⬆](#Table-of-Contents)
+
+The pipelines of the Memory capacity distribution can also be used via the graphical interfaces integrated within BRAPH 2.0. Currently, the interfaces allow the calculation and plotting of group averaged global and nodal memory capacity (single subject calculations can only be performed through the command line).
+
 <a id="Open-the-GUI"></a>
-## Open the GUI  [⬆](#Table-of-Contents)
+### Open the GUI  [⬆](#Table-of-Contents)
 
 The GUI of BRAPH 2 Memory Capacity Distribution can be opened by typing `braph2` in MatLab's terminal. This GUI allows you to select a pipeline, as shown in Figure 1.
 
@@ -67,7 +145,7 @@ Once the pipeline is uploaded, you can see a GUI that contains different steps t
 
 
 <a id="Step-1-Load-the-Brain-Atlas"></a>
-## Step 1: Load the Brain Atlas  [⬆](#Table-of-Contents)
+### Step 1: Load the Brain Atlas  [⬆](#Table-of-Contents)
 
 
 Figure 4 shows how to upload and plot the brain atlas that you used to extract the data for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial [Brain Atlas](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba).
@@ -83,7 +161,7 @@ Figure 4 shows how to upload and plot the brain atlas that you used to extract t
 
 
 <a id="Step-2-Load-the-Connectivity-Group-Data"></a>
-## Step 2: Load the Connectivity Group Data  [⬆](#Table-of-Contents)
+### Step 2: Load the Connectivity Group Data  [⬆](#Table-of-Contents)
 
 After you have loaded the brain atlas, you can upload the *Group MC data* for each group as shown in Figure 5. A new interface will be shown containing the data for the group you just selected. You can open each subject’s connectivity matrices by selecting the subject, right click, and select “Open selection” (for more information check the tutorial [Group of Subjects with Connectivity Data](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con)).
 
@@ -100,7 +178,7 @@ After you have loaded the brain atlas, you can upload the *Group MC data* for ea
 
 
 <a id="Step-3-Analyzing-the-Data-of-Group-1"></a>
-## Step 3: Analyzing the Data of Group 1  [⬆](#Table-of-Contents)
+### Step 3: Analyzing the Data of Group 1  [⬆](#Table-of-Contents)
 
 Once you have loaded the data for both groups, you can begin analyzing the data for the first group by clicking on "Analyze Group 1" (Figure 6a). 
 This will open a new interface called "Analyze Ensemble", which allows you to calculate and visualize graph measures for the first group. 
@@ -109,7 +187,7 @@ Before these network measures are calculated, it is important to ensure that the
 Importantly, the parameters you select at the beginning will remain fixed for the rest of pipeline to ensure the consistency of the analysis (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
 
 <a id="Setting-Analysis-Parameters"></a>
-### Setting Analysis Parameters  [⬆](#Table-of-Contents)
+#### Setting Analysis Parameters  [⬆](#Table-of-Contents)
 
 In the "Analyze Ensemble" interface (Figure 6), you can configure the analysis parameters.
 In the `GRAPH & MEASURE PARAMETERS` section, you can define the following parameters:
@@ -139,10 +217,8 @@ In the `GRAPH & MEASURE PARAMETERS` section, you can define the following parame
 
 
 
-
-
 <a id="Calculate-Measures"></a>
-### Calculate Measures  [⬆](#Table-of-Contents)
+#### Calculate Measures  [⬆](#Table-of-Contents)
 After configuring the parameters, you can proceed to calculate specific graph measures (Figure 7). To do this, scroll down to locate the "Group-averaged MEASURES" panel. By clicking the `C` button, you will see a table displaying all measures. The following two measures are available for this pipeline:
 
 
@@ -151,6 +227,7 @@ After configuring the parameters, you can proceed to calculate specific graph me
 	
 	- `Nodal Memory Capacity`:	The nodal memory capacity measures how well a given node manages to encode a random input signal applied to itself.This nodal memory capacity is determined by training the nodal output to reproduce delayed input time series  and comparing the delayed input applied to the given node with its output.  A high memory capacity indicates that the node has high capacity to remember and process the temporal  information contained in the input signal. The measure is calculated using reservoir computing, which is a recurrent neural-network model.
 	
+
 
 
  More details about the calculation of these two measures can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).
@@ -180,7 +257,7 @@ Finally, when you right-click in the `Group-averaged MEASURES` panel, you will f
 
 
 <a id="Step-4-Analyzing-the-Data-of-Group-2"></a>
-## Step 4: Analyzing the Data of Group 2  [⬆](#Table-of-Contents)
+### Step 4: Analyzing the Data of Group 2  [⬆](#Table-of-Contents)
 
 After completing the analysis of the first group, you can analyze the second group by simply clicking on `Analyze Group 2` (Figure 8a). You will notice that in the new GUI (Figure 8b-c), the parameters you previously selected for the first group are already preselected and fixed for this analysis. 
 
@@ -196,7 +273,7 @@ After completing the analysis of the first group, you can analyze the second gro
 
 
 <a id="Step-5-Comparing-Groups"></a>
-## Step 5: Comparing Groups  [⬆](#Table-of-Contents)
+### Step 5: Comparing Groups  [⬆](#Table-of-Contents)
 
 After exploring the memory capacity measures for each group, you can proceed to their statistical comparison by clicking on `Compare Groups` (Figure 9a).
 
