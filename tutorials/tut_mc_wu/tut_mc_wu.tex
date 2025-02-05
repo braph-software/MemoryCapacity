@@ -1,0 +1,349 @@
+\documentclass[justified]{tufte-handout}
+\usepackage{../braph2_tut}
+%\geometry{showframe} % display margins for debugging page layout
+
+\title[Analysis and Comparison of Memory Capacity WU]{Pipeline for Analysis and Comparison of Memory Capacity using Weighted Undirected Graph}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+This tutorial shows how to perform a \emph{reservoir computing} analysis using \emph{connectivity data} (see tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{Group of Subjects with Connectivity Data}), where one connectivity matrix per subject is available, as in diffusion weighted imaging or pre-calculated matrices obtained from functional MRI, MEG, or EEG. Step by step, this pipeline guides you to first analyze the data of a group of subjects and then compare the data from two groups of subjects, were matrices are \emph{weighted undirected}.  With this tutorial, you will be able to extract and plot differences between two groups. You will also be able to generate publication-quality figures.
+\end{abstract}
+
+\tableofcontents
+
+\clearpage
+
+\section{Generate Example Data}
+
+You can generate the example data by typing in the command line the instruction in \Coderef{cd:generate}.
+
+\begin{lstlisting}[
+	label=cd:generate,
+	caption={
+		{\bf Command to generate example data.}
+		Command to generate the example data for connectivity analyses. This script will create two groups of subjects and the associated atlas files. Each subject has a weighted random connectivity matrix with a mean nodal degree of 4, which has been derived using the Watts–Strogatz model (group 1 uses a rewiring probability of 0.3 and group 2 has a rewiring probability of 0.85). After running the code, the data will be created in \fn{.braph2memorycapacity/pipelines/memorycapacity/Example Data memory capacity}, and includes the brain atlas \fn{atlas.xlsx}, two folders with the subject files \fn{MC\_Group\_1\_XLS} and \fn{MC\_Group\_2\_XLS}, and the associated covariates files \fn{MC\_Group\_1\_XLS.vois.xlsx} and \fn{MC\_Group\_2\_XLS.vois.xlsx}. The details about the format of these files can be found in the tutorials \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas} and \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{Group of Subjects with Connectivity Data}.
+	}
+	]
+	create_data_memorycapacity()
+\end{lstlisting}
+
+After creating the example data, you can run \Coderef{cd:example} (optional)
+
+\begin{lstlisting}[
+	label=cd:example,
+	caption={
+		{\bf Execute Memory Capacity Example.}
+		This is an example script demonstrating how to perform Steps 1-5 of this tutorial.
+	}
+	]
+	 example_memorycapacity()
+\end{lstlisting}
+
+\section{Usage through MATLAB command line (suggested use)}
+\begin{enumerate}
+	
+	\item {\bf Open} the \href{https://github.com/braph-software/MemoryCapacity/tree/develop/braph2memorycapacity}{braph2memorycapacity}  folder.
+	
+	\item {\bf Execute} the \code{braph2.m} script in MATLAB. This script loads BRAPH 2.0 and all related dependencies.
+	
+	\item \code{NORMALIZATION RULE} determines how to normalize the weights between 0 and 1.There are two options \code{threshold range},
+	
+	\item {\bf Close} the main graphical interface that appears. BRAPH 2.0 software is now fully loaded and ready to use.
+	
+	
+	\item{\bf  Load brain atlas}. Braph atlas can be loaded by executing the following code:
+	\begin{lstlisting}[
+	label=cd:atlas,
+			caption={
+			{\bf Command to load brain atlas.}
+			This loads the atlas contained in the "atlas.xlsx" file. A custom atlas can be uploaded by changing the file name; please ensure that the atlas is also in the .xlsx format. For more information about how to create brain atlas file, please check the following \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{tutorial} , as well as the folder \href{https://github.com/braph-software/BRAPH-2/tree/develop/braph2/atlases}{atlases} which contains several already prepared atlases ready to use with BRAPH 2.0.
+		}
+		]
+		im_ba = ImporterBrainAtlasXLS( ...
+		'FILE', ['atlas.xlsx'], ...
+		'WAITBAR', true ...
+		);
+		ba = im_ba.get('BA');
+	\end{lstlisting}
+	
+	
+	\item {\bf  Load group of subjects}. Subjects can be loaded using the following:
+		\begin{lstlisting}[
+		label=cd:loadsubj,
+		caption={
+			{\bf Command to load group of subjects.}
+			The data for all subjects should be contained in a single folder (in this example, named "MC\_Group\_1\_XLS"). Each subject's connectivity matrix should be contained in a single, separate Excel file. For more information about how to create subject files, please check the following \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{tutorial}.
+		}
+		]
+		im_gr1 = ImporterGroupSubjectCON_XLS( ...
+		'DIRECTORY', ['MC_Group_1_XLS'], ...
+		'BA', ba, ...
+		'WAITBAR', true ...
+		);
+		gr1 = im_gr1.get('GR');
+	\end{lstlisting}
+	
+	\item {\bf  Get memory capacity values for individual subjects (optional)}.
+			\begin{lstlisting}[
+		label=cd:loadsubj,
+		caption={
+			{\bf Command to load group of subjects.}
+			The individual values are stored in "global\_memorycapacity\_subject" and "nodal\_memorycapacity\_subject" cell arrays, where each cell holds the data for individual subjects.
+		}
+		]
+		num_subject = gr1.get('SUB_DICT').get('LENGTH');
+		global_memorycapacity_subject = cell(1, num_subject);
+		nodal_memorycapacity_subject  = cell(1, num_subject);
+		for i = 1:1:num_subject
+		global_memorycapacity_subject{i} = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'GlobalMemoryCapacity').get('M');
+		nodal_memorycapacity_subject{i}  = analysis_MC.get('G_DICT').get('IT', i).get('M_DICT').get('IT', 'NodalMemoryCapacity').get('M');
+		end
+	\end{lstlisting}
+	
+\end{enumerate}
+
+\section{Usage through BRAPH 2.0 Graphical User Interfaces}
+
+The pipelines of the Memory capacity distribution can also be used via the graphical interfaces integrated within BRAPH 2.0. Currently, the interfaces allow the calculation and plotting of group averaged global and nodal memory capacity (single subject calculations can only be performed through the command line).
+
+\subsection{Open the GUI}
+
+The GUI of BRAPH~2 Memory Capacity Distribution can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, as shown in \Figref{fig:01}.
+
+%! FIG1 !%
+\fig{figure}
+{fig:01}
+{
+	\includegraphics{fig01.jpg}
+}
+{BRAPH~2 Memory Capacity Distribution main GUI}
+{
+	BRAPH~2 main GUI with the two pipelines for this distribution: \emph{Pipeline Memory Capacity Analysis WU} and \emph{Pipeline Memory Capacity Comparison WU}.
+}
+In this tutorial it will be explained \emph{Pipeline Memory Capacity Comparison WU} since it also covers \emph{Pipeline Memory Capacity Analysis WU} (Step 3 and Step 4 of the tutorial). First, we select the pipeline that we want to run. Once a it is selected a short description of the pipeline will be displayed, as shown in \Figref{fig:02}. Then we press the \fn{Open Pipeline Memory Capacity Comparison WU} button.
+
+%! FIG2 !%
+\fig{figure}
+{fig:02}
+{
+	\includegraphics{fig02.jpg}
+}
+{Pipeline Memory Capacity Comparison WU}
+{
+	Selected \emph{Pipeline Memory Capacity Comparison WU} with short description.
+}
+
+Once the pipeline is uploaded, you can see a GUI that contains different steps to: upload a brain atlas, upload the connectivity data of two groups, analyze them, and finally, compare the groups (\Figref{fig:03}). 
+
+%! FIG3 !%
+\fig{marginfigure}
+{fig:03}
+{
+	\includegraphics{fig03.jpg}
+}
+{Pipeline steps}
+{
+	These are the steps of the pipeline. Only the first step is active when the pipeline is first opened. Subsequent steps will become active sequentially.
+}
+
+\clearpage
+\subsection{Step 1: Load the Brain Atlas}
+
+
+\Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the data for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas}.
+
+%! FIG4 !%
+\fig{figure*}
+{fig:04}
+{
+	\includegraphics{fig04.jpg}
+}
+{Uploading the Brain Atlas}
+{
+	Steps to upload the brain atlas:
+	{\bf a} Click on \fn{Load Atlas} from the pipeline GUI.
+	{\bf b} Navigate to the BRAPH~2 folder \fn{atlases} or the \emph{Example Data memory capacity folder} and select one of the atlas files, in this example the \fn{atlas.xlsx}. 
+	{\bf c} You can visualize the brain atlas by pressing \fn{Plot Brain Atlas}. 
+}
+
+\clearpage
+\subsection{Step 2: Load the Connectivity Group Data}
+
+After you have loaded the brain atlas, you can upload the \emph{Group MC data} for each group as shown in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s connectivity matrices by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con}{Group of Subjects with Connectivity Data}).
+
+%! FIG5 !%
+\fig{figure*}
+{fig:05}
+{
+	\includegraphics{fig05.jpg}
+}
+{Loading and visualizing the group data}
+{
+	{\bf a} From the pipeline GUI, click on \fn{Load Group MC 1 from XLS} to load the data of group 1.
+	{\bf b} Once the data is uploaded, you can select a subject, right click and select \code{Open selection}.
+	{\bf c} This will open the connectivity matrix of the subject in addition to the age and sex of that subject (which are the variables of interest available for the example data).
+	You can then repeat the same procedure for group 2.
+}
+
+
+
+\clearpage
+\subsection{Step 3: Analyzing the Data of Group 1}
+
+Once you have loaded the data for both groups, you can begin analyzing the data for the first group by clicking on \fn{Analyze Group 1} (\Figref{fig:06}a). 
+This will open a new interface called \fn{Analyze Ensemble}, which allows you to calculate and visualize graph measures for the first group. 
+Before these network measures are calculated, it is important to ensure that the graph and measure parameters are set correctly.
+
+Importantly, the parameters you select at the beginning will remain fixed for the rest of pipeline to ensure the consistency of the analysis (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
+
+\subsubsection{Setting Analysis Parameters}
+
+In the \fn{Analyze Ensemble} interface (\Figref{fig:06}), you can configure the analysis parameters.
+In the \code{GRAPH \& MEASURE PARAMETERS} section, you can define the following parameters:
+
+\begin{itemize}
+	
+	\item \code{SYMMETRIZATION RULE} determines how to symmetrize the matrix. There are four options: \code{max sum average min}.
+	
+	\item \code{NEGATIVE EDGE RULE} determines how to remove the negative edges. There are two options: \code{zero absolute}.
+	
+	\item \code{NORMALIZATION RULE} determines how to normalize the weights between 0 and 1.There are two options \code{threshold range},
+	
+	\item \code{RANDOMIZE ON/OFF} determines whether to randomize the graph. \emph{Typically does not need to be changed.}
+	
+	\item \code{RANDOM SEED} is the randomization seed. \emph{Typically does not need to be changed.}
+	
+	\item \code{RANDOMIZATION ATTEMPTS PER EDGE} is the attempts to rewire each edge. \emph{Typically does not need to be changed.}
+	
+	\item \code{RANDOMIZATION NUMBER OF WEIGHTS} specifies the number of weights sorted at the same time. \emph{Typically does not need to be changed.}
+	
+\end{itemize}
+
+%! FIG6 !%
+\fig{figure}
+{fig:06}
+{
+	\includegraphics{fig06.jpg}
+}
+{Configuring analysis parameters}
+{
+	{\bf a} By clicking on the section \code{GRAPH \& MEASURE PARAMETERS}, you open {\bf b} a new interface that permits you to configure the graph parameters. {\bf c} The available parameters shall be set at this point.
+}
+
+\clearpage
+\subsubsection{Calculate Measures}
+After configuring the parameters, you can proceed to calculate specific graph measures (\Figref{fig:07}). To do this, scroll down to locate the \fn{Group-averaged MEASURES} panel. By clicking the \code{C} button, you will see a table displaying all measures. The following two measures are available for this pipeline:
+
+\begin{itemize}
+	
+	\item \code{Global Memory Capacity}: The global memory capacity measures how well a network manages to encode a random input signal in its reservoir (Jaeger, 2001).This global memory capacity is determined by training the network output to reproduce delayed input time series and comparing the delayed input with the reservoir output across all reservoir nodes. A high memory capacity indicates that the network has high capacity to remember and process the temporal information contained in the input signal. The measure is calculated using reservoir computing, which is a recurrent neural-network model.
+	
+	\item \code{Nodal Memory Capacity}:	The nodal memory capacity measures how well a given node manages to encode a random input signal applied to itself.This nodal memory capacity is determined by training the nodal output to reproduce delayed input time series  and comparing the delayed input applied to the given node with its output.  A high memory capacity indicates that the node has high capacity to remember and process the temporal  information contained in the input signal. The measure is calculated using reservoir computing, which is a recurrent neural-network model.
+	
+\end{itemize}
+
+
+ More details about the calculation of these two measures can be found at: Mijalkov et al. Computational memory capacity predicts aging and cognitive decline. (2024).
+
+%! FIG7 !%
+\fig{figure*}
+{fig:07}
+{
+	\includegraphics{fig07.jpg}
+}
+{Analyzing the Group Data}
+{
+	{\bf a} Locate the \code{Group-averaged MEASURES} panel and click the \code{C} button to see all available measures. 
+	{\bf b} Choose the \code{NodalMemoryCapacity} measure, right-click it, and select \code{Calculate Selected Measures} to perform the calculation.
+	{\bf c} To visualize the results, right-click on the top of the table and choose \code{Plot Selected Measures on Brain} in the Analyze Ensemble interface. This action opens a brain surface with the \code{NodalMemoryCapacity} plotted.
+	{\bf d} Explore different views such as the \code{Axial dorsal} button in the brain surface toolbar.
+	{\bf e} Customize and save plot visualizations within the settings menu.
+}
+
+
+As an example, let us select the \code{NodalMemoryCapacity} measure. Right-click at the top of the table and choose \code{Calculate Selected Measures}. Once the calculation is complete, you will notice a \code{C} appearing in front of the \code{NodalMemoryCapacity} row, indicating that this measure has been calculated.
+
+If you wish to visualize the results, right-click on the top of the table and select \code{Plot Selected Measures on Brain} within the Analyze Ensemble interface (\Figref{fig:07}). This will open a brain surface with the \fn{NodalMemoryCapacity} plotted on it.
+
+Within the toolbar of the brain surface interface, you can explore various views.
+For instance, by clicking on the \code{Axial dorsal} button (\Figref{fig:07}c), you will get the same view as shown in \Figref{fig:07}d. Additionally, clicking on the \code{Settings Panel Figure} button (\Figref{fig:07}e) in the same toolbar allows you to adjust different visualization settings.
+
+For instance, within the settings menu (\Figref{fig:07}e), you can disable the size effect. Within the settings menu, you can customize the visualization of the plots and save them for reference.
+
+Finally, when you right-click in the \code{Group-averaged MEASURES} panel, you will find other options to explore, such as \code{Plot Selected Measures} (which generates a line plot for the selected measure at different thresholds and/or different nodes) and \code{Data Selected Measure} (providing the calculated values of the selected measures). These options can also be saved for further analyses outside BRAPH~2.
+
+
+
+\subsection{Step 4: Analyzing the Data of Group 2}
+
+After completing the analysis of the first group, you can analyze the second group by simply clicking on \code{Analyze Group 2} (\Figref{fig:8}a). You will notice that in the new GUI (\Figref{fig:8}b-c), the parameters you previously selected for the first group are already preselected and fixed for this analysis. 
+
+%! FIG8 !%
+\fig{figure*}
+{fig:8}
+{
+	\includegraphics{fig08.jpg}
+}
+{Parameters blocked in the Analysis of Group 2}
+{
+	{\bf a} Click on \fn{Analysis Group 2} in the pipeline's GUI.
+	{\bf b} In this new window, you can see that the measure parameters, when clicking {\bf b} \fn{GRAPH TEMPLATE}, such as  {\bf c} \fn{SYMMETRIZATION RULE},  \fn{NEGATIVE WEIGHTS RULE}, \fn{NORMALIZATION RULE} and \fn{RANDOMIZATION} settings are blocked since they should be the same as the ones set in the analysis of group 1. You can reset the analysis parameters for Group 1 by clicking on the checkbox marked with a \code{D} next to the settings of Group 1.
+}
+
+
+
+
+\clearpage
+\subsection{Step 5: Comparing Groups}
+
+After exploring the memory capacity measures for each group, you can proceed to their statistical comparison by clicking on \code{Compare Groups} (\Figref{fig:9}a).
+
+%! FIG9 !%
+\fig{figure}
+{fig:9}
+{
+	\includegraphics{fig09.jpg}
+}
+{Compare the groups}
+{
+	{\bf a} Click on \code{Compare Groups} in the pipeline's GUI. A new window will pop up, where you can select to turn ON/OFF the wait bar and verbose functions, you can change the number of permutations, and whether to perform a longitudinal group comparison. We set the number of permutations to 10 for this tutorial {\bf b}. Finally, you can calculate the comparisons of some graph measures between groups {\bf c}.
+}
+
+
+In the new window, you have several options to configure the analysis. First, you can choose whether to enable a progress bar and verbose functions while the analysis is running, which can help you monitor the progress of the analysis. You can also specify how many permutations you want to use to assess differences between groups (\Figref{fig:9}b). For computational efficiency, in this tutorial we have set the number of permutations to 10. However, for your research analysis, we recommend using a higher number, such as 1000 or 10000 permutations, to ensure the results are robust.
+
+If your groups are not independent and represent the same subjects assessed in different points in time, you can select the longitudinal comparison option. This option will permute the values within each subject, considering their temporal relationship.
+
+Next, you can select the specific graph measures you wish to compare between the groups. To do this, click on \code{C} in the \code{COMPARISONS} section. Once you have chosen all the measures of interest, right-click and select \code{Calculate Selected Comparisons} (\Figref{fig:9}c).
+
+If you have enabled the progress bar and verbose functions, two additional windows will appear to display the progress of the comparison calculations. Finally, there is an option in this GUI to save intermediate results during the permutations, which can be helpful for further analysis.
+
+To obtain the results from the comparisons, select the measures in the \code{COMPARISONS} panel and press \code{Data Selected Comparisons} ({\Figref{fig:9}d}), and a new window will open where we can check the value of the difference between groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals.
+
+%! FIG10 !%
+\fig{figure*}
+{fig:10}
+{
+	\includegraphics{fig10.jpg}
+}
+{Visualize the group comparison results on a brain surface}
+{
+	{\bf a} Click on \fn{Plot Selected Comparisons on Brain} in the Comparisons panel. 
+	{\bf b} In this new window, you will see the comparison results, with positive values in red and negative values in blue on the brain surface.
+	{\bf c} You can customize this visualization using the settings menu.
+}
+
+
+If you wish to visualize the results, right-click at the top of the table and select \code{Brain Graph Selected Comparison} within the Compare Ensemble interface (\Figref{fig:10}a). This action will open a brain surface displaying the difference between these two groups in terms of the \fn{NodalMemoryCapacity} data or any other nodal measure you have calculated.
+
+Within the brain surface interface's toolbar, you have various options to explore. For example, by clicking on the “Axial dorsal” button (\Figref{fig:10}b), you can access the same view depicted in previous figures during group analysis. Additionally, the “Settings Panel Figure” button in the same toolbar allows you to fine-tune different visualization settings.
+
+For further customization, within the settings menu (\Figref{fig:10}c), you can activate the \code{FDR CORRECTION} feature to control for multiple comparisons and reduce the chance of false positive results when assessing the significance of connectivity measures across multiple brain regions. You can also use the settings menu to personalize the visualization of your plots and save them.
+
+
+
+\end{document}
