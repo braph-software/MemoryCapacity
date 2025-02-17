@@ -7,7 +7,7 @@
 [![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.14633697.svg)](https://doi.org/10.5281/zenodo.14633697)
 
 # BRAPH 2 Memory Capacity
-The **BRAPH 2 Memory Capacity** is a BRAPH 2 distribution that uses the reservoir computing framework to calculate both global and regional memory capacity. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2025).
+The **BRAPH 2 Memory Capacity** is a BRAPH 2 distribution that uses the reservoir computing approach to calculate both global and regional memory capacity. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2025).
 
 This distribution utilizes the full functionalities of the standard BRAPH 2 distribution. More information about the analysis and how to use the interfaces can be found in the main [BRAPH 2](https://github.com/braph-software/BRAPH-2/tree/develop) repository. The full tutorials are available [here](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials).
 
